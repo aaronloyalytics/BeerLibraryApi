@@ -3195,7 +3195,7 @@ __vite_ssr_exports__.default = (sfc, props) => {
 // - vue/server-renderer ($id_UyJffsox60)
 // - /@id/__x00__plugin-vue:export-helper ($id_eFZ80lXORx)
 // --------------------
-const $id_7ahazCTMWz = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+const $id_QWqI5qjZuQ = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
 const __vite_ssr_import_0__ = await __vite_ssr_import__("/composables/useDarkMode.ts");
 
 const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/nuxt/dist/app/index.mjs");
@@ -3210,6 +3210,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_3__.defineComponent({
     expose();
     const { isDarkMode, toggleDarkMode } = __vite_ssr_import_0__.default();
     const { data: beers, error } = __vite_ssr_import_1__.useFetch("https://api.punkapi.com/v2/beers", '$Kmn0Mby3sG');
+    const { data: cart } = __vite_ssr_import_1__.useFetch("/api/cart", '$AErT264Jhr');
     __vite_ssr_import_2__.useHead({
       title: "Beer Api",
       meta: [
@@ -3218,7 +3219,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_3__.defineComponent({
         }
       ]
     });
-    const __returned__ = { isDarkMode, toggleDarkMode, beers, error };
+    const __returned__ = { isDarkMode, toggleDarkMode, beers, error, cart };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -3226,7 +3227,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_3__.defineComponent({
 const __vite_ssr_import_4__ = await __vite_ssr_import__("vue/server-renderer");
 
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
-  _push(`<!--[--><div class="header" style="${__vite_ssr_import_4__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(22, 22, 30)", color: "white" } : null)}"><h1 class="header__main">Beer</h1><h3 class="header__submain">Search for your favourite beer</h3></div><div class="container" style="${__vite_ssr_import_4__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(22, 22, 30)" } : null)}"><!--[-->`);
+  _push(`<!--[--><!-- {{cart}} --><div class="header" style="${__vite_ssr_import_4__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(22, 22, 30)", color: "white" } : null)}"><h1 class="header__main">Beer</h1><h3 class="header__submain">Search for your favourite beer</h3></div><div class="container" style="${__vite_ssr_import_4__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(22, 22, 30)" } : null)}"><!--[-->`);
   __vite_ssr_import_4__.ssrRenderList($setup.beers, (beer, index) => {
     _push(`<div class="card" style="${__vite_ssr_import_4__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(15, 15, 19)" } : null)}"><div class="card-header"><img src="{{beer.image_url}}" alt="rover"></div><div class="card-body" style="${__vite_ssr_import_4__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(27, 29, 33)", color: "white" } : null)}"><span class="tag tag-teal">Ph: ${__vite_ssr_import_4__.ssrInterpolate(beer.ph)}</span><h4><a${__vite_ssr_import_4__.ssrRenderAttr("href", `/beers/${beer.name}`)} style="${__vite_ssr_import_4__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(27, 29, 33)", color: "white" } : null)}">${__vite_ssr_import_4__.ssrInterpolate(beer.name)}</a></h4><p>${__vite_ssr_import_4__.ssrInterpolate(beer.description)}</p><div class="beer"><div class="beer-info"><h5>${__vite_ssr_import_4__.ssrInterpolate(beer.first_brewed)}</h5><small>${__vite_ssr_import_4__.ssrInterpolate(beer.tagline)}</small></div></div></div></div>`);
   });
@@ -3542,7 +3543,7 @@ __vite_ssr_exports__.default = ".gif{\r\n    min-height: 100%;\r\n    min-width:
 // - /pages/beer.vue?vue&type=style&index=0&lang.css ($id_Nz0MWzsC9L)
 // - /@id/__x00__plugin-vue:export-helper ($id_eFZ80lXORx)
 // --------------------
-const $id_PM315vucN1 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+const $id_nMNPFHxJPr = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
 const __vite_ssr_import_0__ = await __vite_ssr_import__("/composables/useDarkMode.ts");
 
 const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/nuxt/dist/app/index.mjs");
@@ -3557,6 +3558,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_3__.defineComponent({
     expose();
     const { isDarkMode, toggleDarkMode } = __vite_ssr_import_0__.default();
     const { data: beers, error } = __vite_ssr_import_1__.useFetch("https://api.punkapi.com/v2/beers", '$lwP790FbCg');
+    const { data: cart } = __vite_ssr_import_1__.useFetch("/api/cart", '$O0wml0LTGa');
     __vite_ssr_import_2__.useHead({
       title: "Beer Api",
       meta: [
@@ -3565,7 +3567,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_3__.defineComponent({
         }
       ]
     });
-    const __returned__ = { isDarkMode, toggleDarkMode, beers, error };
+    const __returned__ = { isDarkMode, toggleDarkMode, beers, error, cart };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -3573,7 +3575,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_3__.defineComponent({
 const __vite_ssr_import_4__ = await __vite_ssr_import__("vue/server-renderer");
 
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
-  _push(`<!--[--><div class="header" style="${__vite_ssr_import_4__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(22, 22, 30)", color: "white" } : null)}"><h1 class="header__main">Beer</h1><h3 class="header__submain">Search for your favourite beer</h3></div><div class="container" style="${__vite_ssr_import_4__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(22, 22, 30)" } : null)}"><!--[-->`);
+  _push(`<!--[--><!-- {{cart}} --><div class="header" style="${__vite_ssr_import_4__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(22, 22, 30)", color: "white" } : null)}"><h1 class="header__main">Beer</h1><h3 class="header__submain">Search for your favourite beer</h3></div><div class="container" style="${__vite_ssr_import_4__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(22, 22, 30)" } : null)}"><!--[-->`);
   __vite_ssr_import_4__.ssrRenderList($setup.beers, (beer, index) => {
     _push(`<div class="card" style="${__vite_ssr_import_4__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(15, 15, 19)" } : null)}"><div class="card-header"><img src="{{beer.image_url}}" alt="rover"></div><div class="card-body" style="${__vite_ssr_import_4__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(27, 29, 33)", color: "white" } : null)}"><span class="tag tag-teal">Ph: ${__vite_ssr_import_4__.ssrInterpolate(beer.ph)}</span><h4><a${__vite_ssr_import_4__.ssrRenderAttr("href", `/beers/${beer.name}`)} style="${__vite_ssr_import_4__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(27, 29, 33)", color: "white" } : null)}">${__vite_ssr_import_4__.ssrInterpolate(beer.name)}</a></h4><p>${__vite_ssr_import_4__.ssrInterpolate(beer.description)}</p><div class="beer"><div class="beer-info"><h5>${__vite_ssr_import_4__.ssrInterpolate(beer.first_brewed)}</h5><small>${__vite_ssr_import_4__.ssrInterpolate(beer.tagline)}</small></div></div></div></div>`);
   });
@@ -3603,8 +3605,8 @@ __vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_7__.default(_sf
 // Dependencies: 
 
 // --------------------
-const $id_7BPB8endtj = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
-__vite_ssr_exports__.default = "@import url(\"https://fonts.googleapis.com/css2?family=Raleway&display=swap\");\n.header {\n  text-align: center;\n  padding: 0 6em;\n}\n.container {\n  background-color: #f7f8fc;\n  font-family: \"Raleway\", sans-serif;\n  color: #10182f;\n  display: flex;\n  width: 3040px;\n  justify-content: space-evenly;\n  flex-wrap: wrap;\n}\n.card {\n  margin: 10px;\n  background-color: #fff;\n  border-radius: 10px;\n  overflow: hidden;\n  width: 300px;\n  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);\n  transition: all 0.3s ease;\n}\n.card:hover {\n  transform: translate(10px, -10px);\n  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);\n}\n.card-header img {\n  width: 100%;\n  height: 200px;\n  -o-object-fit: cover;\n  object-fit: cover;\n}\n.card-body {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: flex-start;\n  padding: 20px;\n  min-height: 250px;\n}\n.tag {\n  background: #cccccc;\n  border-radius: 50px;\n  font-size: 12px;\n  margin: 0;\n  color: #fff;\n  padding: 2px 10px;\n  text-transform: uppercase;\n  cursor: pointer;\n}\n.tag-teal {\n  background-color: #47bcd4;\n}\n.tag-purple {\n  background-color: #5e76bf;\n}\n.tag-pink {\n  background-color: #cd5b9f;\n}\n.card-body p {\n  font-size: 15px;\n  margin: 0 0 40px;\n}\n.card-body h4 {\n  padding: 1em 0 1.6em 0;\n}\n.beer {\n  display: flex;\n  margin-top: auto;\n}\n.beer-info h5 {\n  margin: 0;\n}\n.beer-info small {\n  color: #545d7a;\n}";
+const $id_nT1jiccVxU = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+__vite_ssr_exports__.default = "@import url(\"https://fonts.googleapis.com/css2?family=Raleway&display=swap\");\n.header {\n  text-align: center;\n  padding: 0 6em;\n}\n.container {\n  background-color: #ffffff;\n  font-family: \"Raleway\", sans-serif;\n  color: #10182f;\n  display: flex;\n  width: 3040px;\n  justify-content: space-evenly;\n  flex-wrap: wrap;\n}\n.card {\n  margin: 10px;\n  background-color: #fff;\n  border-radius: 10px;\n  overflow: hidden;\n  width: 300px;\n  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);\n  transition: all 0.3s ease;\n}\n.card:hover {\n  transform: translate(10px, -10px);\n  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);\n}\n.card-header img {\n  width: 100%;\n  height: 200px;\n  -o-object-fit: cover;\n  object-fit: cover;\n}\n.card-body {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: flex-start;\n  padding: 20px;\n  min-height: 250px;\n}\n.tag {\n  background: #cccccc;\n  border-radius: 50px;\n  font-size: 12px;\n  margin: 0;\n  color: #fff;\n  padding: 2px 10px;\n  text-transform: uppercase;\n  cursor: pointer;\n}\n.tag-teal {\n  background-color: #47bcd4;\n}\n.tag-purple {\n  background-color: #5e76bf;\n}\n.tag-pink {\n  background-color: #cd5b9f;\n}\n.card-body p {\n  font-size: 15px;\n  margin: 0 0 40px;\n}\n.card-body h4 {\n  padding: 1em 0 1.6em 0;\n}\n.beer {\n  display: flex;\n  margin-top: auto;\n}\n.beer-info h5 {\n  margin: 0;\n}\n.beer-info small {\n  color: #545d7a;\n}";
 }
 
 
@@ -4679,8 +4681,8 @@ __vite_ssr_exports__.default = /*#__PURE__*/__vite_ssr_import_5__.default(_sfc_m
 // Dependencies: 
 
 // --------------------
-const $id_jGeWWxWYuK = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
-__vite_ssr_exports__.default = "@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);\n* {\r\n  font-family: Roboto;\n}\n.footer-distributed{\r\n\tbackground: rgb(0, 0, 0);\r\n\tbox-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);\r\n\tbox-sizing: border-box;\r\n\twidth: 100%;\r\n\tfont: bold 16px sans-serif;\r\n\ttext-align: left;\r\n\tpadding: 50px 60px 40px;\r\n\toverflow: hidden;\r\n  \tbottom: 0;\n}\nsection {\r\n  width: 100%;\r\n  display: inline-block;\r\n  background: #ccc;\r\n  height: 60vh;\r\n  text-align: center;\r\n  font-size: 22px;\r\n  font-weight: 700;\r\n  text-decoration: underline;\n}\r\n\r\n/* Footer left */\n.footer-distributed .footer-left{\r\n\tfloat: left;\n}\r\n\r\n/* The company logo */\n.footer-distributed h3{\r\n\tcolor:  #ffffff;\r\n\tfont: normal 36px 'Roboto', cursive;\r\n\tmargin: 0 0 10px;\n}\n.footer-distributed h3 span{\r\n\tcolor:  #5383d3;\n}\r\n\r\n/* Footer links */\n.footer-distributed .footer-links{\r\n\tcolor:  #ffffff;\r\n\tmargin: 0 0 10px;\r\n\tpadding: 0;\n}\n.footer-distributed .footer-links a{\r\n\tdisplay:inline-block;\r\n\tline-height: 1.8;\r\n\ttext-decoration: none;\r\n\tcolor:  inherit;\n}\n.footer-distributed .footer-company-name{\r\n\tcolor:  #8f9296;\r\n\tfont-size: 14px;\r\n\tfont-weight: normal;\r\n\tmargin: 0;\n}\r\n\r\n/* Footer social icons */\n.footer-distributed .footer-icons{\r\n\tmargin-top: 40px;\n}\n.footer-distributed .footer-icons a{\r\n\tdisplay: inline-block;\r\n\twidth: 35px;\r\n\theight: 35px;\r\n\tcursor: pointer;\r\n\tbackground-color:  #33383b;\r\n\tborder-radius: 2px;\r\n\r\n\tfont-size: 20px;\r\n\tcolor: #ffffff;\r\n\ttext-align: center;\r\n\tline-height: 35px;\r\n\r\n\tmargin-right: 3px;\r\n\tmargin-bottom: 5px;\n}\r\n\r\n/* Footer Right */\n.footer-distributed .footer-right{\r\n\tfloat: right;\n}\n.footer-distributed .footer-right p{\r\n\tdisplay: inline-block;\r\n\tvertical-align: top;\r\n\tmargin: 15px 42px 0 0;\r\n\tcolor: #ffffff;\n}\r\n\r\n/* The contact form */\n.footer-distributed form{\r\n\tdisplay: inline-block;\n}\n.footer-distributed form input,\r\n.footer-distributed form textarea{\r\n\tdisplay: block;\r\n\tborder-radius: 3px;\r\n\tbox-sizing: border-box;\r\n\tbackground-color:  #1f2022;\r\n\tbox-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.1);\r\n\tborder: none;\r\n\tresize: none;\r\n\r\n\tfont: inherit;\r\n\tfont-size: 14px;\r\n\tfont-weight: normal;\r\n\tcolor:  #d1d2d2;\r\n\r\n\twidth: 400px;\r\n\tpadding: 18px;\n}\n.footer-distributed ::-webkit-input-placeholder {\r\n\tcolor:  #5c666b;\n}\n.footer-distributed ::-moz-placeholder {\r\n\tcolor:  #5c666b;\r\n\topacity: 1;\n}\n.footer-distributed :-ms-input-placeholder{\r\n\tcolor:  #5c666b;\n}\n.footer-distributed form input{\r\n\theight: 55px;\r\n\tmargin-bottom: 15px;\n}\n.footer-distributed form textarea{\r\n\theight: 100px;\r\n\tmargin-bottom: 20px;\n}\n.footer-distributed form button{\r\n\tborder-radius: 3px;\r\n\tbackground-color:  #33383b;\r\n\tcolor: #ffffff;\r\n\tborder: 0;\r\n\tpadding: 15px 50px;\r\n\tfont-weight: bold;\r\n\tfloat: right;\n}\r\n\r\n/* If you don't want the footer to be responsive, remove these media queries */\n@media (max-width: 1000px) {\n.footer-distributed {\r\n\t\tfont: bold 14px sans-serif;\n}\n.footer-distributed .footer-company-name{\r\n\t\tfont-size: 12px;\n}\n.footer-distributed form input,\r\n\t.footer-distributed form textarea{\r\n\t\twidth: 250px;\n}\n.footer-distributed form button{\r\n\t\tpadding: 10px 35px;\n}\n}\n@media (max-width: 800px) {\n.footer-distributed{\r\n\t\tpadding: 30px;\n}\n.footer-distributed .footer-left,\r\n\t.footer-distributed .footer-right{\r\n\t\tfloat: none;\r\n\t\tmax-width: 300px;\r\n\t\tmargin: 0 auto;\n}\n.footer-distributed .footer-left{\r\n\t\tmargin-bottom: 40px;\n}\n.footer-distributed form{\r\n\t\tmargin-top: 30px;\n}\n.footer-distributed form{\r\n\t\tdisplay: block;\n}\n.footer-distributed form button{\r\n\t\tfloat: none;\n}\n}\r\n";
+const $id_BK0G3Nzjk4 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+__vite_ssr_exports__.default = "@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);\n* {\r\n  font-family: Roboto;\n}\n.footer-distributed{\r\n\tbackground: rgb(0, 0, 0);\r\n\tbox-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);\r\n\tbox-sizing: border-box;\r\n\twidth: 100%;\r\n\tfont: bold 16px sans-serif;\r\n\ttext-align: left;\r\n\tpadding: 50px 60px 40px;\r\n\toverflow: hidden;\r\n  \tbottom: 0;\n}\nsection {\r\n  width: 100%;\r\n  display: inline-block;\r\n  background: #ccc;\r\n  height: 60vh;\r\n  text-align: center;\r\n  font-size: 22px;\r\n  font-weight: 700;\r\n  text-decoration: underline;\n}\r\n\r\n/* Footer left */\n.footer-distributed .footer-left{\r\n\tfloat: left;\n}\r\n\r\n/* The company logo */\n.footer-distributed h3{\r\n\tcolor:  #ffffff;\r\n\tfont: normal 36px 'Roboto', cursive;\r\n\tmargin: 0 0 10px;\n}\n.footer-distributed h3 span{\r\n\tcolor:  #5383d3;\n}\r\n\r\n/* Footer links */\n.footer-distributed .footer-links{\r\n\tcolor:  #ffffff;\r\n\tmargin: 0 0 10px;\r\n\tpadding: 0;\n}\n.footer-distributed .footer-links a{\r\n\tdisplay:inline-block;\r\n\tline-height: 1.8;\r\n\ttext-decoration: none;\r\n\tcolor:  inherit;\n}\n.footer-distributed .footer-company-name{\r\n\tcolor:  #8f9296;\r\n\tfont-size: 14px;\r\n\tfont-weight: normal;\r\n\tmargin: 0;\n}\r\n\r\n/* Footer social icons */\n.footer-distributed .footer-icons{\r\n\tmargin-top: 40px;\n}\n.footer-distributed .footer-icons a{\r\n\tdisplay: inline-block;\r\n\twidth: 35px;\r\n\theight: 35px;\r\n\tcursor: pointer;\r\n\tbackground-color:  #33383b;\r\n\tborder-radius: 2px;\r\n\r\n\tfont-size: 20px;\r\n\tcolor: #ffffff;\r\n\ttext-align: center;\r\n\tline-height: 35px;\r\n\r\n\tmargin-right: 3px;\r\n\tmargin-bottom: 5px;\n}\r\n\r\n/* Footer Right */\n.footer-distributed .footer-right{\r\n\tfloat: right;\n}\n.footer-distributed .footer-right p{\r\n\tdisplay: inline-block;\r\n\tvertical-align: top;\r\n\tmargin: 15px 42px 0 0;\r\n\tcolor: #ffffff;\n}\r\n\r\n/* The contact form */\n.footer-distributed form{\r\n\tdisplay: inline-block;\n}\n.footer-distributed form input,\r\n.footer-distributed form textarea{\r\n\tdisplay: block;\r\n\tborder-radius: 3px;\r\n\tbox-sizing: border-box;\r\n\tbackground-color:  #1f2022;\r\n\tbox-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.1);\r\n\tborder: none;\r\n\tresize: none;\r\n\r\n\tfont: inherit;\r\n\tfont-size: 14px;\r\n\tfont-weight: normal;\r\n\tcolor:  #d1d2d2;\r\n\r\n\twidth: 400px;\r\n\tpadding: 18px;\n}\n.footer-distributed ::-webkit-input-placeholder {\r\n\tcolor:  #5c666b;\n}\n.footer-distributed ::-moz-placeholder {\r\n\tcolor:  #5c666b;\r\n\topacity: 1;\n}\n.footer-distributed :-ms-input-placeholder{\r\n\tcolor:  #5c666b;\n}\n.footer-distributed form input{\r\n\theight: 55px;\r\n\tmargin-bottom: 15px;\n}\n.footer-distributed form textarea{\r\n\theight: 100px;\r\n\tmargin-bottom: 20px;\n}\n.footer-distributed form button{\r\n\tborder-radius: 3px;\r\n\tbackground-color:  #33383b;\r\n\tcolor: #ffffff;\r\n\tborder: 0;\r\n\tfont-weight: bold;\r\n\tpadding: 15px 50px;\r\n\tfloat: right;\n}\r\n\r\n/* If you don't want the footer to be responsive, remove these media queries */\n@media (max-width: 1000px) {\n.footer-distributed {\r\n\t\tfont: bold 14px sans-serif;\n}\n.footer-distributed .footer-company-name{\r\n\t\tfont-size: 12px;\n}\n.footer-distributed form input,\r\n\t.footer-distributed form textarea{\r\n\t\twidth: 250px;\n}\n.footer-distributed form button{\r\n\t\tpadding: 10px 35px;\n}\n}\n@media (max-width: 800px) {\n.footer-distributed{\r\n\t\tpadding: 30px;\n}\n.footer-distributed .footer-left,\r\n\t.footer-distributed .footer-right{\r\n\t\tfloat: none;\r\n\t\tmax-width: 300px;\r\n\t\tmargin: 0 auto;\n}\n.footer-distributed .footer-left{\r\n\t\tmargin-bottom: 40px;\n}\n.footer-distributed form{\r\n\t\tmargin-top: 30px;\n}\n.footer-distributed form{\r\n\t\tdisplay: block;\n}\n.footer-distributed form button{\r\n\t\tfloat: none;\n}\n}\r\n";
 }
 
 
@@ -4736,13 +4738,13 @@ const __modules__ = {
   "@giphy/js-fetch-api": $id_3GUECxw8vY,
   "vue/server-renderer": $id_aRHphPzMpI,
   "/@id/__x00__plugin-vue:export-helper": $id_mHD6riC5ol,
-  "/pages/beer.vue?macro=true": $id_7ahazCTMWz,
+  "/pages/beer.vue?macro=true": $id_QWqI5qjZuQ,
   "/pages/beers/[name].vue?macro=true": $id_6EJvqZySl5,
   "/pages/index.vue?macro=true": $id_mB40K3ARkf,
   "/pages/about.vue": $id_8V2wo4Ma5j,
   "/pages/about.vue?vue&type=style&index=0&lang.css": $id_h9jBSPnwwi,
-  "/pages/beer.vue": $id_PM315vucN1,
-  "/pages/beer.vue?vue&type=style&index=0&lang.css": $id_7BPB8endtj,
+  "/pages/beer.vue": $id_nMNPFHxJPr,
+  "/pages/beer.vue?vue&type=style&index=0&lang.css": $id_nT1jiccVxU,
   "/pages/beers/[name].vue": $id_wv8vX4h6WN,
   "/pages/beers/[name].vue?vue&type=style&index=0&lang.css": $id_MOTu73Ebe6,
   "/pages/index.vue": $id_LrJb2rT9Kt,
@@ -4766,7 +4768,7 @@ const __modules__ = {
   "/components/V-header.vue": $id_Ev9uifcOh6,
   "/components/V-header.vue?vue&type=style&index=0&lang.css": $id_DiaVBTNTbs,
   "/components/V-footer.vue": $id_ToI3uRHgBG,
-  "/components/V-footer.vue?vue&type=style&index=0&lang.css": $id_jGeWWxWYuK
+  "/components/V-footer.vue?vue&type=style&index=0&lang.css": $id_BK0G3Nzjk4
 }
 
 
