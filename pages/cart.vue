@@ -1,6 +1,7 @@
 <script setup>
+import { db } from '~/server/db';
 const { data: cart, refresh } = useAsyncData("cart", () => {
-    return $fetch("/api/cart"); 
+    return $fetch("/api/cart");
     refresh();
 });
 const { isDarkMode, toggleDarkMode } = useDarkMode();
@@ -9,6 +10,12 @@ const deleteItem = async (id) => {
     alert("Removed to cart");
     await $fetch(`/api/cart/${id}`, { method: "delete" });
     refresh();
+}
+const purchase = async (id) => {
+    db.cart.splice(0);
+    alert("Delivering to Address XXX");
+    $router.push('/beer');
+    
 }
 useHead({
     title: 'Cart',
@@ -58,7 +65,10 @@ useHead({
             <div class="total-price">${{cartItem.item.ebc}}</div>
             <button type="button" class="remove" @click="() =>deleteItem(cart.id)">x</button>
         </div>
-
+        <hr>
+        <a href="/beer" @click="purchase">
+            <button class="button">Purchase</button>
+        </a>
         <!-- END OF PRODUCT -->
 
     </div>

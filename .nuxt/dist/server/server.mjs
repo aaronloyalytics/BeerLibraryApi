@@ -3271,7 +3271,7 @@ __vite_ssr_exports__.default = (sfc, props) => {
 // - vue/server-renderer ($id_UyJffsox60)
 // - /@id/__x00__plugin-vue:export-helper ($id_eFZ80lXORx)
 // --------------------
-const $id_4xp2JYRNAG = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+const $id_QDcWBEcptH = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
 const __vite_ssr_import_0__ = await __vite_ssr_import__("/composables/useDarkMode.ts");
 
 const __vite_ssr_import_1__ = await __vite_ssr_import__("vue");
@@ -3288,30 +3288,26 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
     expose();
     let __temp, __restore;
     const { isDarkMode, toggleDarkMode } = __vite_ssr_import_0__.default();
+    const beerName = __vite_ssr_import_1__.ref("");
+    const brewedBefore = __vite_ssr_import_1__.ref("");
+    const brewedAfter = __vite_ssr_import_1__.ref("");
     let pgNo = __vite_ssr_import_1__.ref(1);
-    const search = __vite_ssr_import_1__.ref("hello");
-    const input = __vite_ssr_import_1__.ref("");
+    const url = __vite_ssr_import_1__.computed(() => {
+      return `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12&beer_name=${beerName.value}`;
+    });
     const { data: beers, refresh, error } = ([__temp, __restore] = __vite_ssr_import_4__.withAsyncContext(() => __vite_ssr_import_2__.useFetch(
-      () => `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12`
+      () => beerName.value == "" ? `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12` : `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12&beer_name=${beerName.value}`
     , '$Kmn0Mby3sG')), __temp = await __temp, __restore(), __temp);
     const searchBeer = async () => {
-      await __vite_ssr_import_2__.useFetch(() => `https://api.punkapi.com/v2/beers?beer_name=${input.value}`, '$AErT264Jhr');
-      refresh();
-      const formattedSearch = input.value.trim().split(" ").join("+");
-      if (input.value !== "") {
-        const { data: beers2, error: error2 } = __vite_ssr_import_2__.useAsyncData(
-          "beers",
-          async () => {
-            const response = await __vite_ssr_import_2__.useFetch(
-              `https://api.punkapi.com/v2/beers?beer_name=${formattedSearch}`
-            , '$GLffmY7K6l');
-          }
-        , '$fkkHJ42v0O');
-      }
+      const { data: beers2, refresh: refresh2, error: error2 } = await __vite_ssr_import_2__.useFetch(
+        () => beerName.value == "" ? `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12` : `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12&beer_name=${beerName.value}`
+      , '$AErT264Jhr');
+    };
+    const brewDate = async () => {
     };
     const { data: cart } = __vite_ssr_import_2__.useAsyncData("cart", () => {
       return $fetch("/api/cart");
-    }, '$0gS6SY3Weq');
+    }, '$fkkHJ42v0O');
     const addCart = async (data) => {
       if (!data)
         return;
@@ -3350,7 +3346,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
         }
       ]
     });
-    const __returned__ = { isDarkMode, toggleDarkMode, pgNo, search, input, beers, refresh, error, searchBeer, cart, addCart, addFav, nextPage, prevPage };
+    const __returned__ = { isDarkMode, toggleDarkMode, beerName, brewedBefore, brewedAfter, pgNo, url, beers, refresh, error, searchBeer, brewDate, cart, addCart, addFav, nextPage, prevPage };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -3358,7 +3354,9 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
 const __vite_ssr_import_5__ = await __vite_ssr_import__("vue/server-renderer");
 
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
-  _push(`<!--[-->${__vite_ssr_import_5__.ssrInterpolate($setup.input)} <div class="header" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(22, 22, 30)", color: "white" } : null)}"><h1 class="header__main">Beer</h1><h3 class="header__submain">Search for your favourite beer</h3><div class="icons"><a href="./fav"><span class="material-symbols-outlined" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { color: "rgb(255,192,203)" } : null)}">favorite</span></a><a href="./cart"><span class="material-symbols-outlined" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { color: "rgb(212,175,55)" } : null)}">shopping_cart</span></a></div></div><div class="pagination"><a href="#" class="previous" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(27, 29, 33)", color: "white" } : null)}">\xAB Previous</a><a href="#" class="next active">Next \xBB</a></div> <br><div class="search"><input type="text" placeholder="Search Beers e.g. Pale Ale"${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.input)}><button>search</button></div><div class="container" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(22, 22, 30)" } : null)}"><!--[-->`);
+  _push(`<!--[--><!-- {{beerName}} --><div class="header" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(22, 22, 30)", color: "white" } : null)}"><div class="header__text"><h1 class="header__main">Beer API</h1><h3 class="header__submain">Search for your favourite beer</h3></div><div class="icons"><a href="./fav"><span class="material-symbols-outlined" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { color: "rgb(255,192,203)" } : null)}">favorite</span></a><a href="./cart"><span class="material-symbols-outlined" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { color: "rgb(212,175,55)" } : null)}">shopping_cart</span></a></div></div><div class="pagination"><a href="#" class="previous" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(27, 29, 33)", color: "white" } : null)}">\xAB Previous</a><a href="#" class="next active">Next \xBB</a></div> <br><div class="search"><!-- <form @submit.prevent="searchBeer">
+            <input v-model="beerName" type="text" placeholder="Search Beers e.g. Pale Ale" class="searchButton"/>
+        </form> --><div id="cover"><form method="get" action=""><div class="tb"><div class="td"><input${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.beerName)} type="text" placeholder="Search" required></div></div></form><form method="get" action=""><div class="tb"><div class="td"><input${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.brewedBefore)} type="text" placeholder="Brewed Before" required></div></div></form><form method="get" action=""><div class="tb"><div class="td"><input${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.brewedAfter)} type="text" placeholder="Brewed After" required></div></div></form></div></div><div class="container" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(22, 22, 30)" } : null)}"><!--[-->`);
   __vite_ssr_import_5__.ssrRenderList($setup.beers, (beer, index) => {
     _push(`<div class="card" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(15, 15, 19)" } : null)}"><div class="star">\u{1F9E1}</div><div class="card-header"><img${__vite_ssr_import_5__.ssrRenderAttr("src", beer.image_url)} alt="rover"></div><div class="card-body" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(27, 29, 33)", color: "white" } : null)}"><span class="tag tag-teal">Ph: ${__vite_ssr_import_5__.ssrInterpolate(beer.ph)}</span><h4><a${__vite_ssr_import_5__.ssrRenderAttr("href", `/beers/${beer.name}`)} style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(27, 29, 33)", color: "white" } : null)}">${__vite_ssr_import_5__.ssrInterpolate(beer.name)}</a></h4><p>${__vite_ssr_import_5__.ssrInterpolate(beer.description)}</p><p> Tagline: <br> ${__vite_ssr_import_5__.ssrInterpolate(beer.tagline)}</p><div class="beer"><div class="beer-info"><h5>${__vite_ssr_import_5__.ssrInterpolate(beer.first_brewed)}</h5><small>${__vite_ssr_import_5__.ssrInterpolate(beer.tagline)}</small> <br><small><span class="material-symbols-outlined addBeer" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { color: "rgb(255,255,255)" } : null)}"> add_shopping_cart </span></small></div></div></div></div>`);
   });
@@ -3484,16 +3482,20 @@ Object.defineProperty(__vite_ssr_exports__, "meta", { enumerable: true, configur
 // - /node_modules/nuxt/dist/app/index.mjs ($id_NpJ0d20vMd)
 // - /composables/useDarkMode.ts ($id_BBIogYydvh)
 // - /node_modules/nuxt/dist/head/runtime/index.mjs ($id_tzUUgT5kx6)
+// - /server/db/index.ts ($id_GsMSYegWtE)
 // - vue ($id_VkOCJnUZrn)
 // - vue/server-renderer ($id_UyJffsox60)
 // - /@id/__x00__plugin-vue:export-helper ($id_eFZ80lXORx)
 // --------------------
-const $id_JAad9jUssh = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+const $id_TUeugovdDZ = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
 const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/nuxt/dist/app/index.mjs");
 
 const __vite_ssr_import_1__ = await __vite_ssr_import__("/composables/useDarkMode.ts");
 
 const __vite_ssr_import_2__ = await __vite_ssr_import__("/node_modules/nuxt/dist/head/runtime/index.mjs");
+
+const __vite_ssr_import_3__ = await __vite_ssr_import__("/server/db/index.ts");
+
 
 const _sfc_main = {
   __name: 'cart',
@@ -3501,7 +3503,7 @@ const _sfc_main = {
   expose();
 
 const { data: cart, refresh } = __vite_ssr_import_0__.useAsyncData("cart", () => {
-    return $fetch("/api/cart"); 
+    return $fetch("/api/cart");
     refresh();
 }, '$4KwYnQQSz8');
 const { isDarkMode, toggleDarkMode } = __vite_ssr_import_1__.default();
@@ -3510,6 +3512,12 @@ const deleteItem = async (id) => {
     alert("Removed to cart");
     await $fetch(`/api/cart/${id}`, { method: "delete" });
     refresh();
+}
+const purchase = async (id) => {
+    __vite_ssr_import_3__.db.cart.splice(0);
+    alert("Delivering to Address XXX");
+    $router.push('/beer');
+    
 }
 __vite_ssr_import_2__.useHead({
     title: 'Cart',
@@ -3520,53 +3528,71 @@ __vite_ssr_import_2__.useHead({
     ]
 })
 
-const __returned__ = { cart, refresh, isDarkMode, toggleDarkMode, deleteItem }
+const __returned__ = { cart, refresh, isDarkMode, toggleDarkMode, deleteItem, purchase, db: __vite_ssr_import_3__.db }
 Object.defineProperty(__returned__, '__isScriptSetup', { enumerable: false, value: true })
 return __returned__
 }
 
 }
-const __vite_ssr_import_3__ = await __vite_ssr_import__("vue");
+const __vite_ssr_import_4__ = await __vite_ssr_import__("vue");
 
-const __vite_ssr_import_4__ = await __vite_ssr_import__("vue/server-renderer");
+const __vite_ssr_import_5__ = await __vite_ssr_import__("vue/server-renderer");
 
 
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
-  _push(`<!--[--><!-- {{cart}} --><div${__vite_ssr_import_4__.ssrRenderAttrs(__vite_ssr_import_3__.mergeProps({
+  _push(`<!--[--><!-- {{cart}} --><div${__vite_ssr_import_5__.ssrRenderAttrs(__vite_ssr_import_4__.mergeProps({
     class: "shopping-cart",
     style: $setup.isDarkMode ? { backgroundColor: 'rgb(255,255,255)' } : null
   }, _attrs))}><!-- Title --><div class="title"> Cart </div><!-- Product #1 --><!--[-->`)
-  __vite_ssr_import_4__.ssrRenderList($setup.cart, (cartItem, index) => {
+  __vite_ssr_import_5__.ssrRenderList($setup.cart, (cartItem, index) => {
     _push(`<div class="item"><div class="buttons"><span class="delete-btn"></span><span class="like-btn"></span></div><div class="image"><img${
-      __vite_ssr_import_4__.ssrRenderAttr("src", cartItem.item.image_url)
+      __vite_ssr_import_5__.ssrRenderAttr("src", cartItem.item.image_url)
     } alt="" style="${
-      __vite_ssr_import_4__.ssrRenderStyle({"width":"25px","padding-top":"1em","cursor":"pointer"})
+      __vite_ssr_import_5__.ssrRenderStyle({"width":"25px","padding-top":"1em","cursor":"pointer"})
     }"></div><div class="description"><span>${
-      __vite_ssr_import_4__.ssrInterpolate(cartItem.item.name)
+      __vite_ssr_import_5__.ssrInterpolate(cartItem.item.name)
     }</span><span>${
-      __vite_ssr_import_4__.ssrInterpolate(cartItem.item.first_brewed)
+      __vite_ssr_import_5__.ssrInterpolate(cartItem.item.first_brewed)
     }</span><span>${
-      __vite_ssr_import_4__.ssrInterpolate(cartItem.item.tagline)
+      __vite_ssr_import_5__.ssrInterpolate(cartItem.item.tagline)
     }</span></div><div class="quantity"><button class="plus-btn" type="button" name="button"> + </button><input type="text" name="name" value="1"><button class="minus-btn" type="button" name="button"> - </button></div><div class="total-price">\$${
-      __vite_ssr_import_4__.ssrInterpolate(cartItem.item.ebc)
+      __vite_ssr_import_5__.ssrInterpolate(cartItem.item.ebc)
     }</div><button type="button" class="remove">x</button></div>`)
   })
-  _push(`<!--]--><!-- END OF PRODUCT --></div><!--]-->`)
+  _push(`<!--]--><hr><a href="/beer"><button class="button">Purchase</button></a><!-- END OF PRODUCT --></div><!--]-->`)
 }
 
-const __vite_ssr_import_5__ = await __vite_ssr_import__("vue");
+const __vite_ssr_import_6__ = await __vite_ssr_import__("vue");
 
 const _sfc_setup = _sfc_main.setup
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = __vite_ssr_import_5__.useSSRContext()
+  const ssrContext = __vite_ssr_import_6__.useSSRContext()
   ;(ssrContext.modules || (ssrContext.modules = new Set())).add("pages/cart.vue")
   return _sfc_setup ? _sfc_setup(props, ctx) : undefined
 }
-const __vite_ssr_import_6__ = await __vite_ssr_import__("/@id/__x00__plugin-vue:export-helper");
+const __vite_ssr_import_7__ = await __vite_ssr_import__("/@id/__x00__plugin-vue:export-helper");
 
-__vite_ssr_exports__.default = /*#__PURE__*/__vite_ssr_import_6__.default(_sfc_main, [['ssrRender',_sfc_ssrRender],['__file',"D:/Aaron/Code/NUXT/beerLibrary/pages/cart.vue"]])
+__vite_ssr_exports__.default = /*#__PURE__*/__vite_ssr_import_7__.default(_sfc_main, [['ssrRender',_sfc_ssrRender],['__file',"D:/Aaron/Code/NUXT/beerLibrary/pages/cart.vue"]])
 const meta = undefined
 Object.defineProperty(__vite_ssr_exports__, "meta", { enumerable: true, configurable: true, get(){ return meta }});;
+}
+
+
+// --------------------
+// Request: /server/db/index.ts
+// Parents: 
+// - /pages/cart.vue?macro=true ($id_WkoUmBikZP)
+// - /pages/cart.vue ($id_nyBDqOYyME)
+// Dependencies: 
+
+// --------------------
+const $id_rlSI2A7TiJ = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+const db = {
+  cart: [],
+  fav: []
+};
+Object.defineProperty(__vite_ssr_exports__, "db", { enumerable: true, configurable: true, get(){ return db }});
+;
 }
 
 
@@ -3582,7 +3608,7 @@ Object.defineProperty(__vite_ssr_exports__, "meta", { enumerable: true, configur
 // - vue/server-renderer ($id_UyJffsox60)
 // - /@id/__x00__plugin-vue:export-helper ($id_eFZ80lXORx)
 // --------------------
-const $id_5w6ZgSpJui = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+const $id_nb8F11MsE8 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
 const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/nuxt/dist/app/index.mjs");
 
 const __vite_ssr_import_1__ = await __vite_ssr_import__("/composables/useDarkMode.ts");
@@ -3601,7 +3627,7 @@ const _sfc_main = {
     const { isDarkMode, toggleDarkMode } = __vite_ssr_import_1__.default();
     
     const deleteItem = async (id) => {
-        alert("Removed to cart");
+        alert("Removed from WishList");
         await $fetch(`/api/cart/${id}`, { method: "delete" });
         refresh();
     }
@@ -3891,7 +3917,7 @@ __vite_ssr_exports__.default = ".gif{\r\n    min-height: 100%;\r\n    min-width:
 // - /pages/beer.vue?vue&type=style&index=0&lang.css ($id_Nz0MWzsC9L)
 // - /@id/__x00__plugin-vue:export-helper ($id_eFZ80lXORx)
 // --------------------
-const $id_koA5nKJPX8 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+const $id_8eegZLGHal = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
 const __vite_ssr_import_0__ = await __vite_ssr_import__("/composables/useDarkMode.ts");
 
 const __vite_ssr_import_1__ = await __vite_ssr_import__("vue");
@@ -3908,30 +3934,26 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
     expose();
     let __temp, __restore;
     const { isDarkMode, toggleDarkMode } = __vite_ssr_import_0__.default();
+    const beerName = __vite_ssr_import_1__.ref("");
+    const brewedBefore = __vite_ssr_import_1__.ref("");
+    const brewedAfter = __vite_ssr_import_1__.ref("");
     let pgNo = __vite_ssr_import_1__.ref(1);
-    const search = __vite_ssr_import_1__.ref("hello");
-    const input = __vite_ssr_import_1__.ref("");
+    const url = __vite_ssr_import_1__.computed(() => {
+      return `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12&beer_name=${beerName.value}`;
+    });
     const { data: beers, refresh, error } = ([__temp, __restore] = __vite_ssr_import_4__.withAsyncContext(() => __vite_ssr_import_2__.useFetch(
-      () => `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12`
+      () => beerName.value == "" ? `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12` : `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12&beer_name=${beerName.value}`
     , '$lwP790FbCg')), __temp = await __temp, __restore(), __temp);
     const searchBeer = async () => {
-      await __vite_ssr_import_2__.useFetch(() => `https://api.punkapi.com/v2/beers?beer_name=${input.value}`, '$O0wml0LTGa');
-      refresh();
-      const formattedSearch = input.value.trim().split(" ").join("+");
-      if (input.value !== "") {
-        const { data: beers2, error: error2 } = __vite_ssr_import_2__.useAsyncData(
-          "beers",
-          async () => {
-            const response = await __vite_ssr_import_2__.useFetch(
-              `https://api.punkapi.com/v2/beers?beer_name=${formattedSearch}`
-            , '$qgOFtE5Dzi');
-          }
-        , '$ofoqWbX3ud');
-      }
+      const { data: beers2, refresh: refresh2, error: error2 } = await __vite_ssr_import_2__.useFetch(
+        () => beerName.value == "" ? `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12` : `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12&beer_name=${beerName.value}`
+      , '$O0wml0LTGa');
+    };
+    const brewDate = async () => {
     };
     const { data: cart } = __vite_ssr_import_2__.useAsyncData("cart", () => {
       return $fetch("/api/cart");
-    }, '$saiMueXW6m');
+    }, '$ofoqWbX3ud');
     const addCart = async (data) => {
       if (!data)
         return;
@@ -3970,7 +3992,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
         }
       ]
     });
-    const __returned__ = { isDarkMode, toggleDarkMode, pgNo, search, input, beers, refresh, error, searchBeer, cart, addCart, addFav, nextPage, prevPage };
+    const __returned__ = { isDarkMode, toggleDarkMode, beerName, brewedBefore, brewedAfter, pgNo, url, beers, refresh, error, searchBeer, brewDate, cart, addCart, addFav, nextPage, prevPage };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -3978,7 +4000,9 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
 const __vite_ssr_import_5__ = await __vite_ssr_import__("vue/server-renderer");
 
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
-  _push(`<!--[-->${__vite_ssr_import_5__.ssrInterpolate($setup.input)} <div class="header" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(22, 22, 30)", color: "white" } : null)}"><h1 class="header__main">Beer</h1><h3 class="header__submain">Search for your favourite beer</h3><div class="icons"><a href="./fav"><span class="material-symbols-outlined" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { color: "rgb(255,192,203)" } : null)}">favorite</span></a><a href="./cart"><span class="material-symbols-outlined" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { color: "rgb(212,175,55)" } : null)}">shopping_cart</span></a></div></div><div class="pagination"><a href="#" class="previous" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(27, 29, 33)", color: "white" } : null)}">\xAB Previous</a><a href="#" class="next active">Next \xBB</a></div> <br><div class="search"><input type="text" placeholder="Search Beers e.g. Pale Ale"${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.input)}><button>search</button></div><div class="container" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(22, 22, 30)" } : null)}"><!--[-->`);
+  _push(`<!--[--><!-- {{beerName}} --><div class="header" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(22, 22, 30)", color: "white" } : null)}"><div class="header__text"><h1 class="header__main">Beer API</h1><h3 class="header__submain">Search for your favourite beer</h3></div><div class="icons"><a href="./fav"><span class="material-symbols-outlined" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { color: "rgb(255,192,203)" } : null)}">favorite</span></a><a href="./cart"><span class="material-symbols-outlined" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { color: "rgb(212,175,55)" } : null)}">shopping_cart</span></a></div></div><div class="pagination"><a href="#" class="previous" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(27, 29, 33)", color: "white" } : null)}">\xAB Previous</a><a href="#" class="next active">Next \xBB</a></div> <br><div class="search"><!-- <form @submit.prevent="searchBeer">
+            <input v-model="beerName" type="text" placeholder="Search Beers e.g. Pale Ale" class="searchButton"/>
+        </form> --><div id="cover"><form method="get" action=""><div class="tb"><div class="td"><input${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.beerName)} type="text" placeholder="Search" required></div></div></form><form method="get" action=""><div class="tb"><div class="td"><input${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.brewedBefore)} type="text" placeholder="Brewed Before" required></div></div></form><form method="get" action=""><div class="tb"><div class="td"><input${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.brewedAfter)} type="text" placeholder="Brewed After" required></div></div></form></div></div><div class="container" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(22, 22, 30)" } : null)}"><!--[-->`);
   __vite_ssr_import_5__.ssrRenderList($setup.beers, (beer, index) => {
     _push(`<div class="card" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(15, 15, 19)" } : null)}"><div class="star">\u{1F9E1}</div><div class="card-header"><img${__vite_ssr_import_5__.ssrRenderAttr("src", beer.image_url)} alt="rover"></div><div class="card-body" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(27, 29, 33)", color: "white" } : null)}"><span class="tag tag-teal">Ph: ${__vite_ssr_import_5__.ssrInterpolate(beer.ph)}</span><h4><a${__vite_ssr_import_5__.ssrRenderAttr("href", `/beers/${beer.name}`)} style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(27, 29, 33)", color: "white" } : null)}">${__vite_ssr_import_5__.ssrInterpolate(beer.name)}</a></h4><p>${__vite_ssr_import_5__.ssrInterpolate(beer.description)}</p><p> Tagline: <br> ${__vite_ssr_import_5__.ssrInterpolate(beer.tagline)}</p><div class="beer"><div class="beer-info"><h5>${__vite_ssr_import_5__.ssrInterpolate(beer.first_brewed)}</h5><small>${__vite_ssr_import_5__.ssrInterpolate(beer.tagline)}</small> <br><small><span class="material-symbols-outlined addBeer" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { color: "rgb(255,255,255)" } : null)}"> add_shopping_cart </span></small></div></div></div></div>`);
   });
@@ -4008,8 +4032,8 @@ __vite_ssr_exports__.default = /* @__PURE__ */ __vite_ssr_import_8__.default(_sf
 // Dependencies: 
 
 // --------------------
-const $id_0WNmeepSwh = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
-__vite_ssr_exports__.default = "@import url(\"https://fonts.googleapis.com/css2?family=Raleway&display=swap\");\n.header {\n  text-align: center;\n  padding: 0 6em;\n}\n.addBeer{\n  padding-top: .5em;\n  cursor: pointer;\n}\n\n/* start of pagination */\n.pagination {\n  display: inline-block;\n  margin-left: 41%;\n  align-items: center;\n  padding-top: 2em;\n}\n.pagination a {\n  color: black;\n  float: left;\n  padding: 8px 16px;\n  text-decoration: none;\n  transition: background-color .3s;\n}\n.pagination a.active {\n  background-color: #2a2965;\n  color: white;\n}\n.pagination a.active:hover {\n  background-color: white;\n  color: #2a2965;\n}\n.pagination previous:hover:not(.active) {background-color: rgb(121, 57, 57);}\n\n/* end of pagination */\n.input-group{\n  margin:auto;\n  max-width:300px;\n  padding-top:2em;\n}\n.star{\n  cursor: pointer;\n}\n.search > input{\nbackground: #fdfdfd;\nalign-items: center;\npadding-right: 1em;\n}\n.search > button {\n  padding-right: 1em;\n  color: white;\n}\n.container {\n  background-color: #ffffff;\n  font-family: \"Raleway\", sans-serif;\n  color: #10182f;\n  display: flex;\n  width: 3040px;\n  justify-content: space-evenly;\n  flex-wrap: wrap;\n}\n.card {\n  margin: 10px;\n  background-color: #fff;\n  border-radius: 10px;\n  overflow: hidden;\n  width: 300px;\n  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);\n  transition: all 0.3s ease;\n}\n.card:hover {\n  transform: translate(10px, -10px);\n  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);\n}\n.card-header img {\n  width: 40%;\n  height: 400px;\n  -o-object-fit: cover;\n  object-fit: cover;\n}\n.card-body {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: flex-start;\n  padding: 20px;\n  min-height: 250px;\n}\n.tag {\n  background: #cccccc;\n  border-radius: 50px;\n  font-size: 12px;\n  margin: 0;\n  color: #fff;\n  padding: 2px 10px;\n  text-transform: uppercase;\n  cursor: pointer;\n}\n.tag-teal {\n  background-color: #47bcd4;\n}\n.tag-purple {\n  background-color: #5e76bf;\n}\n.tag-pink {\n  background-color: #cd5b9f;\n}\n.card-body p {\n  font-size: 15px;\n  margin: 0 0 40px;\n}\n.card-body h4 {\n  padding: 1em 0 1.6em 0;\n}\n.beer {\n  display: flex;\n  margin-top: auto;\n}\n.beer-info h5 {\n  margin: 0;\n}\n.beer-info small {\n  color: #545d7a;\n}";
+const $id_MFVL8X3Myx = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+__vite_ssr_exports__.default = "@import url(\"https://fonts.googleapis.com/css2?family=Raleway&display=swap\");\n.header {\n  text-align: center;\n  padding: 3em 6em;\n}\n.header__main {\n  font-size: 4em;\n}\n.header__submain {\n  font-size: 2em;\n  font-family: system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto,\n    Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\n  font-style: italic;\n}\n.addBeer {\n  padding-top: 0.5em;\n  cursor: pointer;\n}\n.tb {\n  display: table;\n  width: 100%;\n}\n.td {\n  display: table-cell;\n  vertical-align: middle;\n}\ninput,\nbutton {\n  color: #fff;\n  font-family: Nunito;\n  padding: 0;\n  margin-top: -40%;\n  border: 0;\n  background-color: transparent;\n}\n#cover {\n  position: absolute;\n  top: 53%;\n  left: 0;\n  right: 0;\n  width: 550px;\n  padding: 35px;\n  margin: -83px auto 0 auto;\n  background-color: #2a2965;\n  border-radius: 20px;\n  box-shadow: 0 10px 40px #0e0e22;\n  transform: scale(0.6);\n}\nform {\n  padding-top: 3.5em;\n  height: 16px;\n}\ninput[type=\"text\"] {\n  width: 100%;\n  height: 96px;\n  font-size: 60px;\n  line-height: 1;\n}\ninput[type=\"text\"]::-moz-placeholder {\n  color: #c8c8c8;\n  padding-top:1em;\n}\ninput[type=\"text\"]::placeholder {\n  color: #c8c8c8;\n  padding-top:1em;\n}\nbutton {\n  position: relative;\n  display: block;\n  width: 84px;\n  height: 56px;\n  cursor: pointer;\n}\n#cover > form{\n  display: flex;\n}\n\n/* start of pagination */\n.pagination {\n  display: inline-block;\n  margin-left: 41%;\n  align-items: center;\n  padding-top: 8em;\n}\n.pagination a {\n  color: black;\n  float: left;\n  padding: 8px 16px;\n  text-decoration: none;\n  transition: background-color 0.3s;\n}\n.pagination a.active {\n  background-color: #2a2965;\n  color: white;\n}\n.pagination a.active:hover {\n  background-color: white;\n  color: #ffffff;\n}\n.pagination previous:hover:not(.active) {\n  background-color: rgb(121, 57, 57);\n}\n\n/* end of pagination */\n.input-group {\n  margin: auto;\n  max-width: 300px;\n  padding-top: 2em;\n}\n.star {\n  cursor: pointer;\n}\n.search {\n  padding-top: 2em;\n}\n.container {\n  background-color: #ffffff;\n  font-family: \"Raleway\", sans-serif;\n  color: #10182f;\n  display: flex;\n  width: 3040px;\n  justify-content: space-evenly;\n  flex-wrap: wrap;\n}\n.card {\n  margin: 10px;\n  background-color: #fff;\n  border-radius: 10px;\n  overflow: hidden;\n  width: 300px;\n  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);\n  transition: all 0.3s ease;\n}\n.card:hover {\n  transform: translate(10px, -10px);\n  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);\n}\n.card-header img {\n  width: 40%;\n  height: 400px;\n  -o-object-fit: cover;\n  object-fit: cover;\n}\n.card-body {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: flex-start;\n  padding: 20px;\n  min-height: 250px;\n}\n.tag {\n  background: #cccccc;\n  border-radius: 50px;\n  font-size: 12px;\n  margin: 0;\n  color: #fff;\n  padding: 2px 10px;\n  text-transform: uppercase;\n  cursor: pointer;\n}\n.tag-teal {\n  background-color: #47bcd4;\n}\n.tag-purple {\n  background-color: #5e76bf;\n}\n.tag-pink {\n  background-color: #cd5b9f;\n}\n.card-body p {\n  font-size: 15px;\n  margin: 0 0 40px;\n}\n.card-body h4 {\n  padding: 1em 0 1.6em 0;\n}\n.beer {\n  display: flex;\n  margin-top: auto;\n}\n.beer-info h5 {\n  margin: 0;\n}\n.beer-info small {\n  color: #545d7a;\n}";
 }
 
 
@@ -4129,17 +4153,21 @@ __vite_ssr_exports__.default = "@import url(\"https://fonts.googleapis.com/css2?
 // - /node_modules/nuxt/dist/app/index.mjs ($id_NpJ0d20vMd)
 // - /composables/useDarkMode.ts ($id_BBIogYydvh)
 // - /node_modules/nuxt/dist/head/runtime/index.mjs ($id_tzUUgT5kx6)
+// - /server/db/index.ts ($id_GsMSYegWtE)
 // - vue ($id_VkOCJnUZrn)
 // - vue/server-renderer ($id_UyJffsox60)
 // - /pages/cart.vue?vue&type=style&index=0&lang.css ($id_g9ACfnb37y)
 // - /@id/__x00__plugin-vue:export-helper ($id_eFZ80lXORx)
 // --------------------
-const $id_1mUUyQVKFc = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+const $id_aln9MnKZKb = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
 const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/nuxt/dist/app/index.mjs");
 
 const __vite_ssr_import_1__ = await __vite_ssr_import__("/composables/useDarkMode.ts");
 
 const __vite_ssr_import_2__ = await __vite_ssr_import__("/node_modules/nuxt/dist/head/runtime/index.mjs");
+
+const __vite_ssr_import_3__ = await __vite_ssr_import__("/server/db/index.ts");
+
 
 const _sfc_main = {
   __name: 'cart',
@@ -4147,7 +4175,7 @@ const _sfc_main = {
   expose();
 
 const { data: cart, refresh } = __vite_ssr_import_0__.useAsyncData("cart", () => {
-    return $fetch("/api/cart"); 
+    return $fetch("/api/cart");
     refresh();
 }, '$0qHVSrtFrD');
 const { isDarkMode, toggleDarkMode } = __vite_ssr_import_1__.default();
@@ -4156,6 +4184,12 @@ const deleteItem = async (id) => {
     alert("Removed to cart");
     await $fetch(`/api/cart/${id}`, { method: "delete" });
     refresh();
+}
+const purchase = async (id) => {
+    __vite_ssr_import_3__.db.cart.splice(0);
+    alert("Delivering to Address XXX");
+    $router.push('/beer');
+    
 }
 __vite_ssr_import_2__.useHead({
     title: 'Cart',
@@ -4166,54 +4200,54 @@ __vite_ssr_import_2__.useHead({
     ]
 })
 
-const __returned__ = { cart, refresh, isDarkMode, toggleDarkMode, deleteItem }
+const __returned__ = { cart, refresh, isDarkMode, toggleDarkMode, deleteItem, purchase, db: __vite_ssr_import_3__.db }
 Object.defineProperty(__returned__, '__isScriptSetup', { enumerable: false, value: true })
 return __returned__
 }
 
 }
-const __vite_ssr_import_3__ = await __vite_ssr_import__("vue");
+const __vite_ssr_import_4__ = await __vite_ssr_import__("vue");
 
-const __vite_ssr_import_4__ = await __vite_ssr_import__("vue/server-renderer");
+const __vite_ssr_import_5__ = await __vite_ssr_import__("vue/server-renderer");
 
 
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
-  _push(`<!--[--><!-- {{cart}} --><div${__vite_ssr_import_4__.ssrRenderAttrs(__vite_ssr_import_3__.mergeProps({
+  _push(`<!--[--><!-- {{cart}} --><div${__vite_ssr_import_5__.ssrRenderAttrs(__vite_ssr_import_4__.mergeProps({
     class: "shopping-cart",
     style: $setup.isDarkMode ? { backgroundColor: 'rgb(255,255,255)' } : null
   }, _attrs))}><!-- Title --><div class="title"> Cart </div><!-- Product #1 --><!--[-->`)
-  __vite_ssr_import_4__.ssrRenderList($setup.cart, (cartItem, index) => {
+  __vite_ssr_import_5__.ssrRenderList($setup.cart, (cartItem, index) => {
     _push(`<div class="item"><div class="buttons"><span class="delete-btn"></span><span class="like-btn"></span></div><div class="image"><img${
-      __vite_ssr_import_4__.ssrRenderAttr("src", cartItem.item.image_url)
+      __vite_ssr_import_5__.ssrRenderAttr("src", cartItem.item.image_url)
     } alt="" style="${
-      __vite_ssr_import_4__.ssrRenderStyle({"width":"25px","padding-top":"1em","cursor":"pointer"})
+      __vite_ssr_import_5__.ssrRenderStyle({"width":"25px","padding-top":"1em","cursor":"pointer"})
     }"></div><div class="description"><span>${
-      __vite_ssr_import_4__.ssrInterpolate(cartItem.item.name)
+      __vite_ssr_import_5__.ssrInterpolate(cartItem.item.name)
     }</span><span>${
-      __vite_ssr_import_4__.ssrInterpolate(cartItem.item.first_brewed)
+      __vite_ssr_import_5__.ssrInterpolate(cartItem.item.first_brewed)
     }</span><span>${
-      __vite_ssr_import_4__.ssrInterpolate(cartItem.item.tagline)
+      __vite_ssr_import_5__.ssrInterpolate(cartItem.item.tagline)
     }</span></div><div class="quantity"><button class="plus-btn" type="button" name="button"> + </button><input type="text" name="name" value="1"><button class="minus-btn" type="button" name="button"> - </button></div><div class="total-price">\$${
-      __vite_ssr_import_4__.ssrInterpolate(cartItem.item.ebc)
+      __vite_ssr_import_5__.ssrInterpolate(cartItem.item.ebc)
     }</div><button type="button" class="remove">x</button></div>`)
   })
-  _push(`<!--]--><!-- END OF PRODUCT --></div><!--]-->`)
+  _push(`<!--]--><hr><a href="/beer"><button class="button">Purchase</button></a><!-- END OF PRODUCT --></div><!--]-->`)
 }
 
-const __vite_ssr_import_5__ = await __vite_ssr_import__("/pages/cart.vue?vue&type=style&index=0&lang.css");
+const __vite_ssr_import_6__ = await __vite_ssr_import__("/pages/cart.vue?vue&type=style&index=0&lang.css");
 
 
-const __vite_ssr_import_6__ = await __vite_ssr_import__("vue");
+const __vite_ssr_import_7__ = await __vite_ssr_import__("vue");
 
 const _sfc_setup = _sfc_main.setup
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = __vite_ssr_import_6__.useSSRContext()
+  const ssrContext = __vite_ssr_import_7__.useSSRContext()
   ;(ssrContext.modules || (ssrContext.modules = new Set())).add("pages/cart.vue")
   return _sfc_setup ? _sfc_setup(props, ctx) : undefined
 }
-const __vite_ssr_import_7__ = await __vite_ssr_import__("/@id/__x00__plugin-vue:export-helper");
+const __vite_ssr_import_8__ = await __vite_ssr_import__("/@id/__x00__plugin-vue:export-helper");
 
-__vite_ssr_exports__.default = /*#__PURE__*/__vite_ssr_import_7__.default(_sfc_main, [['ssrRender',_sfc_ssrRender],['__file',"D:/Aaron/Code/NUXT/beerLibrary/pages/cart.vue"]]);
+__vite_ssr_exports__.default = /*#__PURE__*/__vite_ssr_import_8__.default(_sfc_main, [['ssrRender',_sfc_ssrRender],['__file',"D:/Aaron/Code/NUXT/beerLibrary/pages/cart.vue"]]);
 }
 
 
@@ -4224,8 +4258,8 @@ __vite_ssr_exports__.default = /*#__PURE__*/__vite_ssr_import_7__.default(_sfc_m
 // Dependencies: 
 
 // --------------------
-const $id_9JLhpM8jLv = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
-__vite_ssr_exports__.default = ".shopping-cart {\r\n  width: 750px;\r\n  height: 423px;\r\n  margin: 80px auto;\r\n  background: #ffffff;\r\n  box-shadow: 1px 20px 30px 0px rgba(0, 0, 0, 0.1);\r\n  border-radius: 6px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\n}\n.icons{\r\n  padding: 1em  0 0 0 ;\n}\n.icons a {\r\n  padding: 0 .5em;\n}\n.title {\r\n  height: 60px;\r\n  border-bottom: 1px solid #e1e8ee;\r\n  padding: 20px 30px;\r\n  color: #5e6977;\r\n  font-size: 18px;\r\n  font-weight: 400;\n}\n.item {\r\n  padding: 20px 30px;\r\n  display: flex;\n}\n.item:nth-child(3) {\r\n  border-top: 1px solid #e1e8ee;\r\n  border-bottom: 1px solid #e1e8ee;\n}\n.buttons {\r\n  position: relative;\r\n  padding-top: 30px;\r\n  margin-right: 60px;\n}\n.delete-btn,\r\n.like-btn {\r\n  display: inline-block;\r\n  cursor: pointer;\n}\n.delete-btn {\r\n  width: 18px;\r\n  height: 17px;\r\n  background: url() no-repeat center;\n}\n.like-btn {\r\n  position: absolute;\r\n  top: 9px;\r\n  left: 15px;\r\n  width: 60px;\r\n  height: 60px;\r\n  background-size: 2900%;\r\n  background-repeat: no-repeat;\n}\n.is-active {\r\n  -webkit-animation-name: animate;\r\n          animation-name: animate;\r\n  -webkit-animation-duration: 0.8s;\r\n          animation-duration: 0.8s;\r\n  -webkit-animation-iteration-count: 1;\r\n          animation-iteration-count: 1;\r\n  -webkit-animation-timing-function: steps(28);\r\n          animation-timing-function: steps(28);\r\n  -webkit-animation-fill-mode: forwards;\r\n          animation-fill-mode: forwards;\n}\n@-webkit-keyframes animate {\n0% {\r\n    background-position: left;\n}\n50% {\r\n    background-position: right;\n}\n100% {\r\n    background-position: right;\n}\n}\n@keyframes animate {\n0% {\r\n    background-position: left;\n}\n50% {\r\n    background-position: right;\n}\n100% {\r\n    background-position: right;\n}\n}\n.image {\r\n  margin-right: 50px;\n}\n.description {\r\n  padding-top: 10px;\r\n  margin-right: 60px;\r\n  width: 115px;\n}\n.description span {\r\n  display: block;\r\n  font-size: 14px;\r\n  color: #43484d;\r\n  font-weight: 400;\n}\n.description span:first-child {\r\n  margin-bottom: 5px;\n}\n.description span:last-child {\r\n  font-weight: 300;\r\n  margin-top: 8px;\r\n  color: #86939e;\n}\n.quantity {\r\n  padding-top: 20px;\r\n  margin-right: 60px;\n}\n.quantity input {\r\n  -webkit-appearance: none;\r\n  border: none;\r\n  text-align: center;\r\n  width: 32px;\r\n  font-size: 16px;\r\n  color: #43484d;\r\n  font-weight: 300;\n}\nbutton[class*=\"btn\"] {\r\n  width: 30px;\r\n  height: 30px;\r\n  background-color: #e1e8ee;\r\n  border-radius: 6px;\r\n  border: none;\r\n  cursor: pointer;\n}\n.minus-btn img {\r\n  margin-bottom: 3px;\n}\n.plus-btn img {\r\n  margin-top: 2px;\n}\nbutton:focus,\r\ninput:focus {\r\n  outline: 0;\n}\n.total-price {\r\n  width: 83px;\r\n  padding-top: 27px;\r\n  text-align: center;\r\n  font-size: 16px;\r\n  color: #43484d;\r\n  font-weight: 300;\n}\n@media (max-width: 800px) {\n.shopping-cart {\r\n    width: 100%;\r\n    height: auto;\r\n    overflow: hidden;\n}\n.item {\r\n    height: auto;\r\n    flex-wrap: wrap;\r\n    justify-content: center;\n}\n.image img {\r\n    width: 20px;\n}\n.image,\r\n  .quantity,\r\n  .description {\r\n    width: 100%;\r\n    text-align: center;\r\n    margin: 6px 0;\n}\n.buttons {\r\n    margin-right: 20px;\n}\n.remove{\r\n    color: red;\r\n    padding-bottom: 2em;\n}\n}\r\n";
+const $id_6EpMrOubjs = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+__vite_ssr_exports__.default = ".shopping-cart {\r\n  width: 750px;\r\n  height: auto;\r\n  margin: 80px auto;\r\n  background: #ffffff;\r\n  box-shadow: 1px 20px 30px 0px rgba(0, 0, 0, 0.1);\r\n  border-radius: 6px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\n}\n.icons{\r\n  padding: 1em  0 0 0 ;\n}\n.icons a {\r\n  padding: 0 .5em;\n}\n.title {\r\n  height: 60px;\r\n  border-bottom: 1px solid #e1e8ee;\r\n  padding: 20px 30px;\r\n  color: #5e6977;\r\n  font-size: 18px;\r\n  font-weight: 400;\n}\n.item {\r\n  padding: 20px 30px;\r\n  display: flex;\n}\n.item:nth-child(3) {\r\n  border-top: 1px solid #e1e8ee;\r\n  border-bottom: 1px solid #e1e8ee;\n}\n.buttons {\r\n  position: relative;\r\n  padding-top: 30px;\r\n  margin-right: 60px;\n}\n.delete-btn,\r\n.like-btn {\r\n  display: inline-block;\r\n  cursor: pointer;\n}\n.delete-btn {\r\n  width: 18px;\r\n  height: 17px;\r\n  background: url() no-repeat center;\n}\n.like-btn {\r\n  position: absolute;\r\n  top: 9px;\r\n  left: 15px;\r\n  width: 60px;\r\n  height: 60px;\r\n  background-size: 2900%;\r\n  background-repeat: no-repeat;\n}\n.is-active {\r\n  -webkit-animation-name: animate;\r\n          animation-name: animate;\r\n  -webkit-animation-duration: 0.8s;\r\n          animation-duration: 0.8s;\r\n  -webkit-animation-iteration-count: 1;\r\n          animation-iteration-count: 1;\r\n  -webkit-animation-timing-function: steps(28);\r\n          animation-timing-function: steps(28);\r\n  -webkit-animation-fill-mode: forwards;\r\n          animation-fill-mode: forwards;\n}\n.button {\r\n  background-color: #020402; /* Green */\r\n  border: none;\r\n  color: white;\r\n  padding: 15px 32px;\r\n  text-align: center;\r\n  text-decoration: none;\r\n  display: inline-block;\r\n  font-size: 16px;\r\n  float: right;\n}\n@-webkit-keyframes animate {\n0% {\r\n    background-position: left;\n}\n50% {\r\n    background-position: right;\n}\n100% {\r\n    background-position: right;\n}\n}\n@keyframes animate {\n0% {\r\n    background-position: left;\n}\n50% {\r\n    background-position: right;\n}\n100% {\r\n    background-position: right;\n}\n}\n.image {\r\n  margin-right: 50px;\n}\n.description {\r\n  padding-top: 10px;\r\n  margin-right: 60px;\r\n  width: 115px;\n}\n.description span {\r\n  display: block;\r\n  font-size: 14px;\r\n  color: #43484d;\r\n  font-weight: 400;\n}\n.description span:first-child {\r\n  margin-bottom: 5px;\n}\n.description span:last-child {\r\n  font-weight: 300;\r\n  margin-top: 8px;\r\n  color: #86939e;\n}\n.quantity {\r\n  padding-top: 20px;\r\n  margin-right: 60px;\n}\n.quantity input {\r\n  -webkit-appearance: none;\r\n  border: none;\r\n  text-align: center;\r\n  width: 32px;\r\n  font-size: 16px;\r\n  color: #43484d;\r\n  font-weight: 300;\n}\nbutton[class*=\"btn\"] {\r\n  width: 30px;\r\n  height: 30px;\r\n  background-color: #e1e8ee;\r\n  border-radius: 6px;\r\n  border: none;\r\n  cursor: pointer;\n}\n.minus-btn img {\r\n  margin-bottom: 3px;\n}\n.plus-btn img {\r\n  margin-top: 2px;\n}\nbutton:focus,\r\ninput:focus {\r\n  outline: 0;\n}\n.total-price {\r\n  width: 83px;\r\n  padding-top: 27px;\r\n  text-align: center;\r\n  font-size: 16px;\r\n  color: #43484d;\r\n  font-weight: 300;\n}\n@media (max-width: 800px) {\n.shopping-cart {\r\n    width: 100%;\r\n    height: auto;\r\n    overflow: hidden;\n}\n.item {\r\n    height: auto;\r\n    flex-wrap: wrap;\r\n    justify-content: center;\n}\n.image img {\r\n    width: 20px;\n}\n.image,\r\n  .quantity,\r\n  .description {\r\n    width: 100%;\r\n    text-align: center;\r\n    margin: 6px 0;\n}\n.buttons {\r\n    margin-right: 20px;\n}\n.remove{\r\n    color: red;\r\n    padding-bottom: 2em;\n}\n}\r\n";
 }
 
 
@@ -4242,7 +4276,7 @@ __vite_ssr_exports__.default = ".shopping-cart {\r\n  width: 750px;\r\n  height:
 // - /pages/fav.vue?vue&type=style&index=0&lang.css ($id_uj28GakfrD)
 // - /@id/__x00__plugin-vue:export-helper ($id_eFZ80lXORx)
 // --------------------
-const $id_Z1I58W9dI8 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+const $id_enOoq9qQ9d = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
 const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/nuxt/dist/app/index.mjs");
 
 const __vite_ssr_import_1__ = await __vite_ssr_import__("/composables/useDarkMode.ts");
@@ -4261,7 +4295,7 @@ const _sfc_main = {
     const { isDarkMode, toggleDarkMode } = __vite_ssr_import_1__.default();
     
     const deleteItem = async (id) => {
-        alert("Removed to cart");
+        alert("Removed from WishList");
         await $fetch(`/api/cart/${id}`, { method: "delete" });
         refresh();
     }
@@ -4332,8 +4366,8 @@ __vite_ssr_exports__.default = /*#__PURE__*/__vite_ssr_import_7__.default(_sfc_m
 // Dependencies: 
 
 // --------------------
-const $id_C3LdSCfULQ = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
-__vite_ssr_exports__.default = ".shopping-cart {\r\n  width: 750px;\r\n  height: 423px;\r\n  margin: 80px auto;\r\n  background: #ffffff;\r\n  box-shadow: 1px 20px 30px 0px rgba(0, 0, 0, 0.1);\r\n  border-radius: 6px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\n}\n.icons{\r\n  padding: 1em  0 0 0 ;\n}\n.icons a {\r\n  padding: 0 .5em;\n}\n.title {\r\n  height: 60px;\r\n  border-bottom: 1px solid #e1e8ee;\r\n  padding: 20px 30px;\r\n  color: #5e6977;\r\n  font-size: 18px;\r\n  font-weight: 400;\n}\n.item {\r\n  padding: 20px 30px;\r\n  display: flex;\n}\n.item:nth-child(3) {\r\n  border-top: 1px solid #e1e8ee;\r\n  border-bottom: 1px solid #e1e8ee;\n}\n.buttons {\r\n  position: relative;\r\n  padding-top: 30px;\r\n  margin-right: 60px;\n}\n.delete-btn,\r\n.like-btn {\r\n  display: inline-block;\r\n  cursor: pointer;\n}\n.delete-btn {\r\n  width: 18px;\r\n  height: 17px;\r\n  background: url() no-repeat center;\n}\n.like-btn {\r\n  position: absolute;\r\n  top: 9px;\r\n  left: 15px;\r\n  width: 60px;\r\n  height: 60px;\r\n  background-size: 2900%;\r\n  background-repeat: no-repeat;\n}\n.is-active {\r\n  -webkit-animation-name: animate;\r\n          animation-name: animate;\r\n  -webkit-animation-duration: 0.8s;\r\n          animation-duration: 0.8s;\r\n  -webkit-animation-iteration-count: 1;\r\n          animation-iteration-count: 1;\r\n  -webkit-animation-timing-function: steps(28);\r\n          animation-timing-function: steps(28);\r\n  -webkit-animation-fill-mode: forwards;\r\n          animation-fill-mode: forwards;\n}\n@-webkit-keyframes animate {\n0% {\r\n    background-position: left;\n}\n50% {\r\n    background-position: right;\n}\n100% {\r\n    background-position: right;\n}\n}\n@keyframes animate {\n0% {\r\n    background-position: left;\n}\n50% {\r\n    background-position: right;\n}\n100% {\r\n    background-position: right;\n}\n}\n.image {\r\n  margin-right: 50px;\n}\n.description {\r\n  padding-top: 10px;\r\n  margin-right: 60px;\r\n  width: 115px;\n}\n.description span {\r\n  display: block;\r\n  font-size: 14px;\r\n  color: #43484d;\r\n  font-weight: 400;\n}\n.description span:first-child {\r\n  margin-bottom: 5px;\n}\n.description span:last-child {\r\n  font-weight: 300;\r\n  margin-top: 8px;\r\n  color: #86939e;\n}\n.quantity {\r\n  padding-top: 20px;\r\n  margin-right: 60px;\n}\n.quantity input {\r\n  -webkit-appearance: none;\r\n  border: none;\r\n  text-align: center;\r\n  width: 32px;\r\n  font-size: 16px;\r\n  color: #43484d;\r\n  font-weight: 300;\n}\nbutton[class*=\"btn\"] {\r\n  width: 30px;\r\n  height: 30px;\r\n  background-color: #e1e8ee;\r\n  border-radius: 6px;\r\n  border: none;\r\n  cursor: pointer;\n}\n.minus-btn img {\r\n  margin-bottom: 3px;\n}\n.plus-btn img {\r\n  margin-top: 2px;\n}\nbutton:focus,\r\ninput:focus {\r\n  outline: 0;\n}\n.total-price {\r\n  width: 83px;\r\n  padding-top: 27px;\r\n  text-align: center;\r\n  font-size: 16px;\r\n  color: #43484d;\r\n  font-weight: 300;\n}\n@media (max-width: 800px) {\n.shopping-cart {\r\n    width: 100%;\r\n    height: auto;\r\n    overflow: hidden;\n}\n.item {\r\n    height: auto;\r\n    flex-wrap: wrap;\r\n    justify-content: center;\n}\n.image img {\r\n    width: 20px;\n}\n.image,\r\n  .quantity,\r\n  .description {\r\n    width: 100%;\r\n    text-align: center;\r\n    margin: 6px 0;\n}\n.buttons {\r\n    margin-right: 20px;\n}\n.remove{\r\n    color: red;\r\n    padding-bottom: 2em;\n}\n}\r\n    ";
+const $id_hZdocVIzZ3 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+__vite_ssr_exports__.default = ".shopping-cart {\r\n  width: 750px;\r\n  height: auto;\r\n  margin: 80px auto;\r\n  background: #ffffff;\r\n  box-shadow: 1px 20px 30px 0px rgba(0, 0, 0, 0.1);\r\n  border-radius: 6px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\n}\n.icons{\r\n  padding: 1em  0 0 0 ;\n}\n.icons a {\r\n  padding: 0 .5em;\n}\n.title {\r\n  height: 60px;\r\n  border-bottom: 1px solid #e1e8ee;\r\n  padding: 20px 30px;\r\n  color: #5e6977;\r\n  font-size: 18px;\r\n  font-weight: 400;\n}\n.item {\r\n  padding: 20px 30px;\r\n  display: flex;\n}\n.item:nth-child(3) {\r\n  border-top: 1px solid #e1e8ee;\r\n  border-bottom: 1px solid #e1e8ee;\n}\n.buttons {\r\n  position: relative;\r\n  padding-top: 30px;\r\n  margin-right: 60px;\n}\n.delete-btn,\r\n.like-btn {\r\n  display: inline-block;\r\n  cursor: pointer;\n}\n.delete-btn {\r\n  width: 18px;\r\n  height: 17px;\r\n  background: url() no-repeat center;\n}\n.like-btn {\r\n  position: absolute;\r\n  top: 9px;\r\n  left: 15px;\r\n  width: 60px;\r\n  height: 60px;\r\n  background-size: 2900%;\r\n  background-repeat: no-repeat;\n}\n.is-active {\r\n  -webkit-animation-name: animate;\r\n          animation-name: animate;\r\n  -webkit-animation-duration: 0.8s;\r\n          animation-duration: 0.8s;\r\n  -webkit-animation-iteration-count: 1;\r\n          animation-iteration-count: 1;\r\n  -webkit-animation-timing-function: steps(28);\r\n          animation-timing-function: steps(28);\r\n  -webkit-animation-fill-mode: forwards;\r\n          animation-fill-mode: forwards;\n}\n.button {\r\n  background-color: #020402; /* Green */\r\n  border: none;\r\n  color: white;\r\n  padding: 15px 32px;\r\n  text-align: center;\r\n  text-decoration: none;\r\n  display: inline-block;\r\n  font-size: 16px;\r\n  float: right;\n}\n@-webkit-keyframes animate {\n0% {\r\n    background-position: left;\n}\n50% {\r\n    background-position: right;\n}\n100% {\r\n    background-position: right;\n}\n}\n@keyframes animate {\n0% {\r\n    background-position: left;\n}\n50% {\r\n    background-position: right;\n}\n100% {\r\n    background-position: right;\n}\n}\n.image {\r\n  margin-right: 50px;\n}\n.description {\r\n  padding-top: 10px;\r\n  margin-right: 60px;\r\n  width: 115px;\n}\n.description span {\r\n  display: block;\r\n  font-size: 14px;\r\n  color: #43484d;\r\n  font-weight: 400;\n}\n.description span:first-child {\r\n  margin-bottom: 5px;\n}\n.description span:last-child {\r\n  font-weight: 300;\r\n  margin-top: 8px;\r\n  color: #86939e;\n}\n.quantity {\r\n  padding-top: 20px;\r\n  margin-right: 60px;\n}\n.quantity input {\r\n  -webkit-appearance: none;\r\n  border: none;\r\n  text-align: center;\r\n  width: 32px;\r\n  font-size: 16px;\r\n  color: #43484d;\r\n  font-weight: 300;\n}\nbutton[class*=\"btn\"] {\r\n  width: 30px;\r\n  height: 30px;\r\n  background-color: #e1e8ee;\r\n  border-radius: 6px;\r\n  border: none;\r\n  cursor: pointer;\n}\n.minus-btn img {\r\n  margin-bottom: 3px;\n}\n.plus-btn img {\r\n  margin-top: 2px;\n}\nbutton:focus,\r\ninput:focus {\r\n  outline: 0;\n}\n.total-price {\r\n  width: 83px;\r\n  padding-top: 27px;\r\n  text-align: center;\r\n  font-size: 16px;\r\n  color: #43484d;\r\n  font-weight: 300;\n}\n@media (max-width: 800px) {\n.shopping-cart {\r\n    width: 100%;\r\n    height: auto;\r\n    overflow: hidden;\n}\n.item {\r\n    height: auto;\r\n    flex-wrap: wrap;\r\n    justify-content: center;\n}\n.image img {\r\n    width: 20px;\n}\n.image,\r\n  .quantity,\r\n  .description {\r\n    width: 100%;\r\n    text-align: center;\r\n    margin: 6px 0;\n}\n.buttons {\r\n    margin-right: 20px;\n}\n.remove{\r\n    color: red;\r\n    padding-bottom: 2em;\n}\n}\r\n    ";
 }
 
 
@@ -5409,7 +5443,7 @@ __vite_ssr_exports__.default = /*#__PURE__*/__vite_ssr_import_5__.default(_sfc_m
 // - /components/V-header.vue?vue&type=style&index=0&lang.css ($id_idTUnRyme2)
 // - /@id/__x00__plugin-vue:export-helper ($id_eFZ80lXORx)
 // --------------------
-const $id_GQGeMQqO66 = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+const $id_UFiszeDnNA = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
 const __vite_ssr_import_0__ = await __vite_ssr_import__("/composables/useDarkMode.ts");
 
 const __vite_ssr_import_1__ = await __vite_ssr_import__("vue");
@@ -5432,7 +5466,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
   _push(`<header${__vite_ssr_import_3__.ssrRenderAttrs(__vite_ssr_import_2__.mergeProps({
     class: "site-header",
     style: $setup.isDarkMode ? { backgroundColor: "rgb(22,22,30)" } : null
-  }, _attrs))}><div class="site-identity" style="${__vite_ssr_import_3__.ssrRenderStyle($setup.isDarkMode ? { color: "white" } : null)}"><h1><a href="/" style="${__vite_ssr_import_3__.ssrRenderStyle($setup.isDarkMode ? { color: "white" } : null)}">Aaron </a></h1></div><nav class="site-navigation"><ul class="nav"><li><a href="/" style="${__vite_ssr_import_3__.ssrRenderStyle($setup.isDarkMode ? { color: "white" } : null)}"> Home </a></li><li><a href="/about" style="${__vite_ssr_import_3__.ssrRenderStyle($setup.isDarkMode ? { color: "white" } : null)}"> About </a></li><li><p><a href="/beer" style="${__vite_ssr_import_3__.ssrRenderStyle($setup.isDarkMode ? { color: "white" } : null)}"> Beer API </a><!-- \xB7
+  }, _attrs))}><div class="site-identity" style="${__vite_ssr_import_3__.ssrRenderStyle($setup.isDarkMode ? { color: "white" } : null)}"><h1><a href="/" style="${__vite_ssr_import_3__.ssrRenderStyle($setup.isDarkMode ? { color: "white" } : null)}">Aaron </a></h1></div><nav class="site-navigation"><ul class="nav"><li><a href="/" style="${__vite_ssr_import_3__.ssrRenderStyle($setup.isDarkMode ? { color: "white" } : null)}"> Home </a></li><li><a href="/about" style="${__vite_ssr_import_3__.ssrRenderStyle($setup.isDarkMode ? { color: "white" } : null)}"> About </a></li><li><p><a href="/beer" style="${__vite_ssr_import_3__.ssrRenderStyle($setup.isDarkMode ? { color: "white" } : null)}"> Beer API </a><a style="${__vite_ssr_import_3__.ssrRenderStyle($setup.isDarkMode ? { color: "white" } : null)}">\u25CB</a><a href="/cart" style="${__vite_ssr_import_3__.ssrRenderStyle($setup.isDarkMode ? { color: "white" } : null)}"> Cart </a><!-- \xB7
             <a href="/cart">About</a>
             \xB7
             <a href="/beer">Beer API</a> --></p></li><li><label class="switch"><input type="checkbox"${__vite_ssr_import_3__.ssrIncludeBooleanAttr(Array.isArray($setup.isDarkMode) ? __vite_ssr_import_3__.ssrLooseContain($setup.isDarkMode, null) : $setup.isDarkMode) ? " checked" : ""}><span class="slider round"></span></label></li></ul></nav></header>`);
@@ -5609,21 +5643,22 @@ const __modules__ = {
   "@giphy/js-fetch-api": $id_3GUECxw8vY,
   "vue/server-renderer": $id_aRHphPzMpI,
   "/@id/__x00__plugin-vue:export-helper": $id_mHD6riC5ol,
-  "/pages/beer.vue?macro=true": $id_4xp2JYRNAG,
+  "/pages/beer.vue?macro=true": $id_QDcWBEcptH,
   "/pages/beers/[name].vue?macro=true": $id_cns8bS54AQ,
-  "/pages/cart.vue?macro=true": $id_JAad9jUssh,
-  "/pages/fav.vue?macro=true": $id_5w6ZgSpJui,
+  "/pages/cart.vue?macro=true": $id_TUeugovdDZ,
+  "/server/db/index.ts": $id_rlSI2A7TiJ,
+  "/pages/fav.vue?macro=true": $id_nb8F11MsE8,
   "/pages/index.vue?macro=true": $id_i7GBo78qxv,
   "/pages/about.vue": $id_ScA0NSy8hI,
   "/pages/about.vue?vue&type=style&index=0&lang.css": $id_h9jBSPnwwi,
-  "/pages/beer.vue": $id_koA5nKJPX8,
-  "/pages/beer.vue?vue&type=style&index=0&lang.css": $id_0WNmeepSwh,
+  "/pages/beer.vue": $id_8eegZLGHal,
+  "/pages/beer.vue?vue&type=style&index=0&lang.css": $id_MFVL8X3Myx,
   "/pages/beers/[name].vue": $id_hdbHAUAxw1,
   "/pages/beers/[name].vue?vue&type=style&index=0&lang.css": $id_OcQRcmFX60,
-  "/pages/cart.vue": $id_1mUUyQVKFc,
-  "/pages/cart.vue?vue&type=style&index=0&lang.css": $id_9JLhpM8jLv,
-  "/pages/fav.vue": $id_Z1I58W9dI8,
-  "/pages/fav.vue?vue&type=style&index=0&lang.css": $id_C3LdSCfULQ,
+  "/pages/cart.vue": $id_aln9MnKZKb,
+  "/pages/cart.vue?vue&type=style&index=0&lang.css": $id_6EpMrOubjs,
+  "/pages/fav.vue": $id_enOoq9qQ9d,
+  "/pages/fav.vue?vue&type=style&index=0&lang.css": $id_hZdocVIzZ3,
   "/pages/index.vue": $id_RD71Sepf4k,
   "/@id/virtual:nuxt:D:/Aaron/Code/NUXT/beerLibrary/.nuxt/router.options.mjs": $id_B9lJ7CXUZU,
   "/@id/virtual:nuxt:D:/Aaron/Code/NUXT/beerLibrary/.nuxt/middleware.mjs": $id_k3VJ9HNHaS,
@@ -5649,7 +5684,7 @@ const __modules__ = {
   "/node_modules/nuxt/dist/app/components/layout.mjs": $id_U04gjib51w,
   "/@id/virtual:nuxt:D:/Aaron/Code/NUXT/beerLibrary/.nuxt/layouts.mjs": $id_S2FmQAqxY3,
   "/layouts/default.vue": $id_BwL152dpNp,
-  "/components/V-header.vue": $id_GQGeMQqO66,
+  "/components/V-header.vue": $id_UFiszeDnNA,
   "/components/V-header.vue?vue&type=style&index=0&lang.css": $id_DiaVBTNTbs,
   "/components/V-footer.vue": $id_JKhT5bKTjM,
   "/components/V-footer.vue?vue&type=style&index=0&lang.css": $id_BK0G3Nzjk4

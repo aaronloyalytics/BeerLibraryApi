@@ -13,13 +13,15 @@ const { data: cart } = useAsyncData("cart", () => {
 });
 
 const addCart = async (data) => {
-    if (!data) return; console.log(data);
+    if (!data) return; 
+    console.log(data);
     alert("Added to cart");
     await $fetch("/api/cart", { method: "post", body: { item: beer.value[data] } });
     refresh()
 }
 const addFav = async (data) => { 
-    if (!data) return; console.log(data);
+    if (!data) return; 
+    console.log(data);
     alert("Added to WishList");
     await $fetch("/api/fav", { method: "post", body: { item: beer.value[data] } });
     refresh()
@@ -62,7 +64,7 @@ useHead({
             <div class="wish" @click="addFav(index)">🧡</div>
             <small>
                 <span class="material-symbols-outlined addBeer"
-                    :style="isDarkMode ? { color: 'rgb(255,255,255)' } : null" @click="addCart(item)">
+                    :style="isDarkMode ? { color: 'rgb(255,255,255)' } : null" @click="addCart(item.index)">
 
                     add_shopping_cart
                 </span>

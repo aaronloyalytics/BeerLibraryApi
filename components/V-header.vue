@@ -20,6 +20,10 @@
             <a href="/beer" :style="isDarkMode ? { color: 'white', } : null">
               Beer API
             </a>
+            <a :style="isDarkMode ? { color: 'white', } : null">&cir;</a>
+            <a href="/cart" :style="isDarkMode ? { color: 'white', } : null">
+              Cart
+            </a>
             <!-- ·
             <a href="/cart">About</a>
             ·

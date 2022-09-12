@@ -6,7 +6,7 @@
     const { isDarkMode, toggleDarkMode } = useDarkMode();
     
     const deleteItem = async (id) => {
-        alert("Removed to cart");
+        alert("Removed from WishList");
         await $fetch(`/api/cart/${id}`, { method: "delete" });
         refresh();
     }

@@ -1,32 +1,33 @@
 <script setup lang="ts">
 const { isDarkMode, toggleDarkMode } = useDarkMode();
+const beerName = ref("");
+const brewedBefore = ref("");
+const brewedAfter = ref("");
 let pgNo = ref(1);
-const search = ref("hello");
-const input = ref("");
 
+const url = computed(() => {
+    return `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12&beer_name=${beerName.value}`
+})
 
 const { data: beers, refresh, error } = await useFetch(
-    () => `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12`
+    () => beerName.value == "" ? `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12` : `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12&beer_name=${beerName.value}`
 );
 
-
+//  condition1 ? value1
+// : condition2 ? value2
+//         : condition3 ? value3
+//         : value4;
 
 const searchBeer = async () => {
-    await useFetch(() =>`https://api.punkapi.com/v2/beers?beer_name=${input.value}`);
-    refresh();
-    const formattedSearch = input.value.trim().split(" ").join("+");
-    if (input.value !== "") {
-        const { data: beers, error } = useAsyncData("beers", async () => {
-            const response = await useFetch(
-                `https://api.punkapi.com/v2/beers?beer_name=${formattedSearch}`
-            );
-        }
-        );
-    }
+    const { data: beers, refresh, error } = await useFetch(
+        () => beerName.value == "" ? `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12` : `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12&beer_name=${beerName.value}`
+    );
+
 }
 
+const brewDate = async () => {
 
-
+}
 
 const { data: cart } = useAsyncData("cart", () => {
     return $fetch("/api/cart")
@@ -70,10 +71,13 @@ useHead({
 </script>
 
 <template>
-    {{input}}
+    <!-- {{beerName}} -->
     <div class="header" :style="isDarkMode ? { backgroundColor: 'rgb(22, 22, 30)', color: 'white' } : null">
-        <h1 class="header__main">Beer</h1>
-        <h3 class="header__submain">Search for your favourite beer</h3>
+        <div class="header__text">
+            <h1 class="header__main">Beer API</h1>
+            <h3 class="header__submain">Search for your favourite beer</h3>
+
+        </div>
         <div class="icons">
             <a href="./fav"><span class="material-symbols-outlined"
                     :style="isDarkMode ? { color: 'rgb(255,192,203)' } : null">favorite</span></a>
@@ -87,9 +91,34 @@ useHead({
         <a href="#" class="next active" @click="nextPage">Next &raquo;</a>
     </div> <br>
 
+
     <div class="search">
-        <input type="text" placeholder="Search Beers e.g. Pale Ale" v-model="input" />
-        <button @click="searchBeer">search</button>
+        <!-- <form @submit.prevent="searchBeer">
+            <input v-model="beerName" type="text" placeholder="Search Beers e.g. Pale Ale" class="searchButton"/>
+        </form> -->
+        <div id="cover">
+            <form method="get" @submit.prevent="searchBeer" action="">
+                <div class="tb">
+                    <div class="td">
+                        <input v-model="beerName" type="text" placeholder="Search" required>
+                    </div>
+                </div>
+            </form>
+            <form method="get" action="">
+                <div class="tb">
+                    <div class="td">
+                        <input v-model="brewedBefore" type="text" placeholder="Brewed Before" required>
+                    </div>
+                </div>
+            </form>
+            <form method="get" action="">
+                <div class="tb">
+                    <div class="td">
+                        <input v-model="brewedAfter" type="text" placeholder="Brewed After" required>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
     <div class="container" :style="isDarkMode ? { backgroundColor: 'rgb(22, 22, 30)' } : null">
@@ -145,3 +174,16 @@ useHead({
 <style>
 @import '~/assets/style/beer.css';
 </style>
+
+<script lang="ts">
+    // const formattedSearch = beerName.value.trim().split(" ").join("+");
+    // if (beerName.value !== "") {
+    //     const { data: beers, error } = useAsyncData("beers", async () => {
+    //         const response = await useFetch(
+    //             `https://api.punkapi.com/v2/beers?beer_name=${formattedSearch}`
+    //         );
+    //     }
+    //     );
+    // }
+    // if (beerName.value !== "") { refresh(); } else { url.value }
+</script>
