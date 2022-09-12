@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "devDependencies": {
+    "nuxt": "3.0.0-rc.8"
+  },
+  "dependencies": {
+    "@giphy/js-fetch-api": "^4.4.0",
+    "@notionhq/client": "^2.1.1",
+    "@nuxt/ui": "^0.3.2",
+    "uuid": "^8.3.2"
+  }
+}
