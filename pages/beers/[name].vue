@@ -18,7 +18,7 @@ const addCart = async (data) => {
     await $fetch("/api/cart", { method: "post", body: { item: beer.value[data] } });
     refresh()
 }
-const addFav = async (data) => {
+const addFav = async (data) => { 
     if (!data) return; console.log(data);
     alert("Added to WishList");
     await $fetch("/api/fav", { method: "post", body: { item: beer.value[data] } });
