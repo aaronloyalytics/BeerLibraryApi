@@ -21,7 +21,7 @@
 
         <div class="footer-right">
 
-            <p>Contact Us</p>
+            <p>Contact Me</p>
 
             <form onsubmit="submitHandler(content)">
 

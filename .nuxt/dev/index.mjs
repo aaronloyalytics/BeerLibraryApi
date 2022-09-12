@@ -1,26 +1,26 @@
-globalThis._importMeta_={url:import.meta.url,env:process.env};import 'file://D:/Aaron/Code/NUXT/week3/node_modules/node-fetch-native/dist/polyfill.mjs';
+globalThis._importMeta_={url:import.meta.url,env:process.env};import 'file://D:/Aaron/Code/NUXT/beerLibrary/node_modules/node-fetch-native/dist/polyfill.mjs';
 import { Server } from 'http';
 import { tmpdir } from 'os';
 import { join } from 'path';
 import { mkdirSync } from 'fs';
 import { parentPort, threadId } from 'worker_threads';
-import { provider, isWindows } from 'file://D:/Aaron/Code/NUXT/week3/node_modules/std-env/dist/index.mjs';
-import { Client } from 'file://D:/Aaron/Code/NUXT/week3/node_modules/@notionhq/client/build/src/index.js';
-import { eventHandler, defineEventHandler, handleCacheHeaders, createEvent, createApp, createRouter, lazyEventHandler, readBody, useBody, createError, sendError, getQuery } from 'file://D:/Aaron/Code/NUXT/week3/node_modules/h3/dist/index.mjs';
+import { provider, isWindows } from 'file://D:/Aaron/Code/NUXT/beerLibrary/node_modules/std-env/dist/index.mjs';
+import { Client } from 'file://D:/Aaron/Code/NUXT/beerLibrary/node_modules/@notionhq/client/build/src/index.js';
+import { eventHandler, defineEventHandler, handleCacheHeaders, createEvent, createApp, createRouter, lazyEventHandler, readBody, useBody, createError, sendError, getQuery } from 'file://D:/Aaron/Code/NUXT/beerLibrary/node_modules/h3/dist/index.mjs';
 import crypto from 'crypto';
-import { createRenderer } from 'file://D:/Aaron/Code/NUXT/week3/node_modules/vue-bundle-renderer/dist/runtime.mjs';
-import devalue from 'file://D:/Aaron/Code/NUXT/week3/node_modules/@nuxt/devalue/dist/devalue.mjs';
-import { renderToString } from 'file://D:/Aaron/Code/NUXT/week3/node_modules/vue/server-renderer/index.mjs';
-import { parseURL, withQuery, joinURL } from 'file://D:/Aaron/Code/NUXT/week3/node_modules/ufo/dist/index.mjs';
-import destr from 'file://D:/Aaron/Code/NUXT/week3/node_modules/destr/dist/index.mjs';
-import { snakeCase } from 'file://D:/Aaron/Code/NUXT/week3/node_modules/scule/dist/index.mjs';
-import { createFetch as createFetch$1, Headers } from 'file://D:/Aaron/Code/NUXT/week3/node_modules/ohmyfetch/dist/node.mjs';
-import { createRouter as createRouter$1 } from 'file://D:/Aaron/Code/NUXT/week3/node_modules/radix3/dist/index.mjs';
-import { createCall, createFetch } from 'file://D:/Aaron/Code/NUXT/week3/node_modules/unenv/runtime/fetch/index.mjs';
-import { createHooks } from 'file://D:/Aaron/Code/NUXT/week3/node_modules/hookable/dist/index.mjs';
-import { hash } from 'file://D:/Aaron/Code/NUXT/week3/node_modules/ohash/dist/index.mjs';
-import { createStorage } from 'file://D:/Aaron/Code/NUXT/week3/node_modules/unstorage/dist/index.mjs';
-import _unstorage_drivers_fs from 'file://D:/Aaron/Code/NUXT/week3/node_modules/unstorage/dist/drivers/fs.mjs';
+import { createRenderer } from 'file://D:/Aaron/Code/NUXT/beerLibrary/node_modules/vue-bundle-renderer/dist/runtime.mjs';
+import devalue from 'file://D:/Aaron/Code/NUXT/beerLibrary/node_modules/@nuxt/devalue/dist/devalue.mjs';
+import { renderToString } from 'file://D:/Aaron/Code/NUXT/beerLibrary/node_modules/vue/server-renderer/index.mjs';
+import { parseURL, withQuery, joinURL } from 'file://D:/Aaron/Code/NUXT/beerLibrary/node_modules/ufo/dist/index.mjs';
+import destr from 'file://D:/Aaron/Code/NUXT/beerLibrary/node_modules/destr/dist/index.mjs';
+import { snakeCase } from 'file://D:/Aaron/Code/NUXT/beerLibrary/node_modules/scule/dist/index.mjs';
+import { createFetch as createFetch$1, Headers } from 'file://D:/Aaron/Code/NUXT/beerLibrary/node_modules/ohmyfetch/dist/node.mjs';
+import { createRouter as createRouter$1 } from 'file://D:/Aaron/Code/NUXT/beerLibrary/node_modules/radix3/dist/index.mjs';
+import { createCall, createFetch } from 'file://D:/Aaron/Code/NUXT/beerLibrary/node_modules/unenv/runtime/fetch/index.mjs';
+import { createHooks } from 'file://D:/Aaron/Code/NUXT/beerLibrary/node_modules/hookable/dist/index.mjs';
+import { hash } from 'file://D:/Aaron/Code/NUXT/beerLibrary/node_modules/ohash/dist/index.mjs';
+import { createStorage } from 'file://D:/Aaron/Code/NUXT/beerLibrary/node_modules/unstorage/dist/index.mjs';
+import _unstorage_drivers_fs from 'file://D:/Aaron/Code/NUXT/beerLibrary/node_modules/unstorage/dist/drivers/fs.mjs';
 
 const _runtimeConfig = {"app":{"baseURL":"/","buildAssetsDir":"/_nuxt/","cdnURL":""},"nitro":{"routes":{},"envPrefix":"NUXT_"},"public":{}};
 const ENV_PREFIX = "NITRO_";
@@ -79,7 +79,7 @@ function timingMiddleware(_req, res, next) {
   next();
 }
 
-const serverAssets = [{"baseName":"server","dir":"D:/Aaron/Code/NUXT/week3/server/assets"}];
+const serverAssets = [{"baseName":"server","dir":"D:/Aaron/Code/NUXT/beerLibrary/server/assets"}];
 
 const assets = createStorage();
 
@@ -93,10 +93,10 @@ const useStorage = () => storage;
 
 storage.mount('/assets', assets);
 
-storage.mount('root', _unstorage_drivers_fs({"driver":"fs","base":"D:\\Aaron\\Code\\NUXT\\week3","ignore":["**/node_modules/**","**/.git/**"]}));
-storage.mount('src', _unstorage_drivers_fs({"driver":"fs","base":"D:\\Aaron\\Code\\NUXT\\week3\\server","ignore":["**/node_modules/**","**/.git/**"]}));
-storage.mount('build', _unstorage_drivers_fs({"driver":"fs","base":"D:\\Aaron\\Code\\NUXT\\week3\\.nuxt","ignore":["**/node_modules/**","**/.git/**"]}));
-storage.mount('cache', _unstorage_drivers_fs({"driver":"fs","base":"D:\\Aaron\\Code\\NUXT\\week3\\.nuxt\\cache","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('root', _unstorage_drivers_fs({"driver":"fs","base":"D:\\Aaron\\Code\\NUXT\\beerLibrary","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('src', _unstorage_drivers_fs({"driver":"fs","base":"D:\\Aaron\\Code\\NUXT\\beerLibrary\\server","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('build', _unstorage_drivers_fs({"driver":"fs","base":"D:\\Aaron\\Code\\NUXT\\beerLibrary\\.nuxt","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('cache', _unstorage_drivers_fs({"driver":"fs","base":"D:\\Aaron\\Code\\NUXT\\beerLibrary\\.nuxt\\cache","ignore":["**/node_modules/**","**/.git/**"]}));
 
 function defineRenderHandler$1(handler) {
   return eventHandler(async (event) => {
@@ -361,21 +361,21 @@ const errorHandler = (async function errorhandler(error, event) {
   event.res.end(html);
 });
 
-const _lazy_YbIXR4 = () => Promise.resolve().then(function () { return notion$1; });
-const _lazy_C6NgCR = () => Promise.resolve().then(function () { return index$3; });
-const _lazy_muAy5n = () => Promise.resolve().then(function () { return _id_$3; });
-const _lazy_fuaDBd = () => Promise.resolve().then(function () { return index$1; });
-const _lazy_How2Dw = () => Promise.resolve().then(function () { return _id_$1; });
-const _lazy_zZuWXM = () => Promise.resolve().then(function () { return renderer$1; });
+const _lazy_LicpmU = () => Promise.resolve().then(function () { return notion$1; });
+const _lazy_yJrosm = () => Promise.resolve().then(function () { return index$3; });
+const _lazy_66r505 = () => Promise.resolve().then(function () { return _id_$3; });
+const _lazy_J1Yq1F = () => Promise.resolve().then(function () { return index$1; });
+const _lazy_L8RP8d = () => Promise.resolve().then(function () { return _id_$1; });
+const _lazy_RFaIfd = () => Promise.resolve().then(function () { return renderer$1; });
 
 const handlers = [
-  { route: '/api/notion', handler: _lazy_YbIXR4, lazy: true, middleware: false, method: undefined },
-  { route: '/api/fav', handler: _lazy_C6NgCR, lazy: true, middleware: false, method: undefined },
-  { route: '/api/fav/:id', handler: _lazy_muAy5n, lazy: true, middleware: false, method: undefined },
-  { route: '/api/cart', handler: _lazy_fuaDBd, lazy: true, middleware: false, method: undefined },
-  { route: '/api/cart/:id', handler: _lazy_How2Dw, lazy: true, middleware: false, method: undefined },
-  { route: '/__nuxt_error', handler: _lazy_zZuWXM, lazy: true, middleware: false, method: undefined },
-  { route: '/**', handler: _lazy_zZuWXM, lazy: true, middleware: false, method: undefined }
+  { route: '/api/notion', handler: _lazy_LicpmU, lazy: true, middleware: false, method: undefined },
+  { route: '/api/fav', handler: _lazy_yJrosm, lazy: true, middleware: false, method: undefined },
+  { route: '/api/fav/:id', handler: _lazy_66r505, lazy: true, middleware: false, method: undefined },
+  { route: '/api/cart', handler: _lazy_J1Yq1F, lazy: true, middleware: false, method: undefined },
+  { route: '/api/cart/:id', handler: _lazy_L8RP8d, lazy: true, middleware: false, method: undefined },
+  { route: '/__nuxt_error', handler: _lazy_RFaIfd, lazy: true, middleware: false, method: undefined },
+  { route: '/**', handler: _lazy_RFaIfd, lazy: true, middleware: false, method: undefined }
 ];
 
 function createNitroApp() {
@@ -739,8 +739,8 @@ function publicAssetsURL(...path) {
 }
 
 const defineRenderHandler = defineRenderHandler$1;
-const getClientManifest = () => import('file://D:/Aaron/Code/NUXT/week3/.nuxt/dist/server/client.manifest.mjs').then((r) => r.default || r).then((r) => typeof r === "function" ? r() : r);
-const getServerEntry = () => import('file://D:/Aaron/Code/NUXT/week3/.nuxt/dist/server/server.mjs').then((r) => r.default || r);
+const getClientManifest = () => import('file://D:/Aaron/Code/NUXT/beerLibrary/.nuxt/dist/server/client.manifest.mjs').then((r) => r.default || r).then((r) => typeof r === "function" ? r() : r);
+const getServerEntry = () => import('file://D:/Aaron/Code/NUXT/beerLibrary/.nuxt/dist/server/server.mjs').then((r) => r.default || r);
 const getSSRRenderer = lazyCachedFunction(async () => {
   const manifest = await getClientManifest();
   if (!manifest) {

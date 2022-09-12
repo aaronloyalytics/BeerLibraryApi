@@ -5,6 +5,7 @@ export default {
     "css": [
       "node_modules/@nuxt/ui/dist/assets/styles.css",
       "pages/about.vue?vue&type=style&index=0&lang.css",
+      "pages/beer.vue?vue&type=style&index=0&lang.css",
       "pages/beers/[name].vue?vue&type=style&index=0&lang.css",
       "pages/cart.vue?vue&type=style&index=0&lang.css",
       "pages/fav.vue?vue&type=style&index=0&lang.css",
@@ -25,6 +26,10 @@ export default {
   },
   "pages/about.vue?vue&type=style&index=0&lang.css": {
     "file": "pages/about.vue?vue&type=style&index=0&lang.css",
+    "resourceType": "style"
+  },
+  "pages/beer.vue?vue&type=style&index=0&lang.css": {
+    "file": "pages/beer.vue?vue&type=style&index=0&lang.css",
     "resourceType": "style"
   },
   "pages/beers/[name].vue?vue&type=style&index=0&lang.css": {
@@ -67,9 +72,9 @@ export default {
     "file": "components/V-footer.vue?vue&type=style&index=0&lang.css",
     "resourceType": "style"
   },
-  "D:/Aaron/Code/NUXT/week3/node_modules/nuxt/dist/app/entry": {
+  "D:/Aaron/Code/NUXT/beerLibrary/node_modules/nuxt/dist/app/entry": {
     "isEntry": true,
-    "file": "D:/Aaron/Code/NUXT/week3/node_modules/nuxt/dist/app/entry",
+    "file": "D:/Aaron/Code/NUXT/beerLibrary/node_modules/nuxt/dist/app/entry",
     "module": true,
     "resourceType": "script"
   }

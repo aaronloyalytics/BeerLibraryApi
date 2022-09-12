@@ -10,7 +10,7 @@ export default defineEventHandler((e) => {
   const { id } = context.params;
 
   const findCartById = (cartId) => {
-    // find todo in db
+    // find beer   in db
     let index;
     const cart = db.cart.find((t, i) => {
       if (t.id === cartId) {

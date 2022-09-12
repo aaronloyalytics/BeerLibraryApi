@@ -1,35 +1,23 @@
 <script setup lang="ts">
-import axios from 'axios';
 const { isDarkMode, toggleDarkMode } = useDarkMode();
 let pgNo = ref(1);
 const search = ref("hello");
 const input = ref("");
-let url = `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12`;
 
 
-const { data: beers, refresh, error} = await useFetch(
-    () => url 
+const { data: beers, refresh, error } = await useFetch(
+    () => `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12`
 );
 
 
 
-const searchBeer = async() => {
-    axios.get(`https://api.punkapi.com/v2/beers?beer_name=${input.value}`);
-    await $fetch(`https://api.punkapi.com/v2/beers?beer_name=${input.value}`);
-    refresh();
-
-    const formattedSearch = input.value;
-    url.concat(`&beer_name=${formattedSearch}`);
-    history.pushState(
-        {},
-        null,
-        url + '&beer_name=' + input
-    )
+const searchBeer = async () => {
+    await useFetch(() =>`https://api.punkapi.com/v2/beers?beer_name=${input.value}`);
     refresh();
     const formattedSearch = input.value.trim().split(" ").join("+");
     if (input.value !== "") {
         const { data: beers, error } = useAsyncData("beers", async () => {
-            const response = await $fetch(
+            const response = await useFetch(
                 `https://api.punkapi.com/v2/beers?beer_name=${formattedSearch}`
             );
         }
@@ -84,8 +72,11 @@ useHead({
 <template>
     {{input}}
     <div class="header" :style="isDarkMode ? { backgroundColor: 'rgb(22, 22, 30)', color: 'white' } : null">
-        <h1 class="header__main">Beer</h1>
-        <h3 class="header__submain">Search for your favourite beer</h3>
+        <div class="header__text">
+            <h1 class="header__main">Beer API</h1>
+            <h3 class="header__submain">Search for your favourite beer</h3>
+
+        </div>
         <div class="icons">
             <a href="./fav"><span class="material-symbols-outlined"
                     :style="isDarkMode ? { color: 'rgb(255,192,203)' } : null">favorite</span></a>
@@ -97,9 +88,13 @@ useHead({
         <a href="#" class="previous" @click="prevPage"
             :style="isDarkMode ? { backgroundColor: 'rgb(27, 29, 33)', color: 'white' } : null">&laquo; Previous</a>
         <a href="#" class="next active" @click="nextPage">Next &raquo;</a>
+    </div> <br>
+
+    <div class="search">
+        <input type="text" placeholder="Search Beers e.g. Pale Ale" v-model="input" />
+        <button @click="searchBeer">search</button>
     </div>
-    <input type="text" placeholder="Search Beers e.g. Pale Ale" v-model="input" />
-    <button @click="searchBeer">search</button>
+
     <div class="container" :style="isDarkMode ? { backgroundColor: 'rgb(22, 22, 30)' } : null">
 
         <div class="card" v-for="(beer, index) in beers"
