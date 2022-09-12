@@ -17,13 +17,13 @@ export default defineEventHandler(async (e) => {
       });
       sendError(e, noFoundError);
     }
-    const newCart = {
+    const newFav = {
       id: v4(),
       item: body.item,
       completed: false,
     };
-    console.log(newCart);
-    db.cart.push(newCart);
-    return newCart;
+    console.log(newFav);
+    db.cart.push(newFav);
+    return newFav;
   }
 });

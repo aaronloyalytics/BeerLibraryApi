@@ -6,7 +6,7 @@ import { mkdirSync } from 'fs';
 import { parentPort, threadId } from 'worker_threads';
 import { provider, isWindows } from 'file://D:/Aaron/Code/NUXT/week3/node_modules/std-env/dist/index.mjs';
 import { Client } from 'file://D:/Aaron/Code/NUXT/week3/node_modules/@notionhq/client/build/src/index.js';
-import { eventHandler, defineEventHandler, handleCacheHeaders, createEvent, createApp, createRouter, lazyEventHandler, readBody, useBody, getQuery } from 'file://D:/Aaron/Code/NUXT/week3/node_modules/h3/dist/index.mjs';
+import { eventHandler, defineEventHandler, handleCacheHeaders, createEvent, createApp, createRouter, lazyEventHandler, readBody, useBody, createError, sendError, getQuery } from 'file://D:/Aaron/Code/NUXT/week3/node_modules/h3/dist/index.mjs';
 import crypto from 'crypto';
 import { createRenderer } from 'file://D:/Aaron/Code/NUXT/week3/node_modules/vue-bundle-renderer/dist/runtime.mjs';
 import devalue from 'file://D:/Aaron/Code/NUXT/week3/node_modules/@nuxt/devalue/dist/devalue.mjs';
@@ -362,12 +362,18 @@ const errorHandler = (async function errorhandler(error, event) {
 });
 
 const _lazy_YbIXR4 = () => Promise.resolve().then(function () { return notion$1; });
+const _lazy_C6NgCR = () => Promise.resolve().then(function () { return index$3; });
+const _lazy_muAy5n = () => Promise.resolve().then(function () { return _id_$3; });
 const _lazy_fuaDBd = () => Promise.resolve().then(function () { return index$1; });
+const _lazy_How2Dw = () => Promise.resolve().then(function () { return _id_$1; });
 const _lazy_zZuWXM = () => Promise.resolve().then(function () { return renderer$1; });
 
 const handlers = [
   { route: '/api/notion', handler: _lazy_YbIXR4, lazy: true, middleware: false, method: undefined },
+  { route: '/api/fav', handler: _lazy_C6NgCR, lazy: true, middleware: false, method: undefined },
+  { route: '/api/fav/:id', handler: _lazy_muAy5n, lazy: true, middleware: false, method: undefined },
   { route: '/api/cart', handler: _lazy_fuaDBd, lazy: true, middleware: false, method: undefined },
+  { route: '/api/cart/:id', handler: _lazy_How2Dw, lazy: true, middleware: false, method: undefined },
   { route: '/__nuxt_error', handler: _lazy_zZuWXM, lazy: true, middleware: false, method: undefined },
   { route: '/**', handler: _lazy_zZuWXM, lazy: true, middleware: false, method: undefined }
 ];
@@ -497,7 +503,8 @@ const notion$1 = /*#__PURE__*/Object.freeze({
 });
 
 const db = {
-  cart: []
+  cart: [],
+  fav: []
 };
 
 const rnds8Pool = new Uint8Array(256); // # of random values to pre-allocate
@@ -565,16 +572,100 @@ function v4(options, buf, offset) {
   return stringify(rnds);
 }
 
-const index = defineEventHandler(async (e) => {
-  console.log(e);
+const index$2 = defineEventHandler(async (e) => {
   const method = e.req.method;
   if (method === "GET") {
     return db.cart;
   }
   if (method === "POST") {
     const body = await useBody(e);
-    if (!body.item)
-      throw new Error();
+    if (!body.item) {
+      const noFoundError = createError({
+        statusCode: 400,
+        statusMessage: "No Item Provided",
+        data: {}
+      });
+      sendError(e, noFoundError);
+    }
+    const newFav = {
+      id: v4(),
+      item: body.item,
+      completed: false
+    };
+    console.log(newFav);
+    db.cart.push(newFav);
+    return newFav;
+  }
+});
+
+const index$3 = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  'default': index$2
+});
+
+const _id_$2 = defineEventHandler((e) => {
+  const method = e.req.method;
+  console.log(e);
+  const context = e.context;
+  const { id } = context.params;
+  const findFavById = (favId) => {
+    let index;
+    const fav = db.fav.find((t, i) => {
+      if (t.id === favId) {
+        index = i;
+        return true;
+      }
+      return false;
+    });
+    if (!fav) {
+      const noFoundError = createError({
+        statusCode: 404,
+        statusMessage: "fav not found",
+        data: {}
+      });
+      sendError(e, noFoundError);
+    }
+    return { fav, index };
+  };
+  if (method === "PUT") {
+    const { fav, index } = findFavById(id);
+    const updatedfav = {
+      ...fav,
+      completed: !fav.completed
+    };
+    db.fav[index] = updatedfav;
+    console.log(updatedfav);
+    return updatedfav;
+  }
+  if (method === "DELETE") {
+    const { fav, index } = findFavById(id);
+    db.fav.splice(index, 1);
+    return {
+      message: "item deleted"
+    };
+  }
+});
+
+const _id_$3 = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  'default': _id_$2
+});
+
+const index = defineEventHandler(async (e) => {
+  const method = e.req.method;
+  if (method === "GET") {
+    return db.cart;
+  }
+  if (method === "POST") {
+    const body = await useBody(e);
+    if (!body.item) {
+      const noFoundError = createError({
+        statusCode: 400,
+        statusMessage: "No Item Provided",
+        data: {}
+      });
+      sendError(e, noFoundError);
+    }
     const newCart = {
       id: v4(),
       item: body.item,
@@ -589,6 +680,54 @@ const index = defineEventHandler(async (e) => {
 const index$1 = /*#__PURE__*/Object.freeze({
   __proto__: null,
   'default': index
+});
+
+const _id_ = defineEventHandler((e) => {
+  const method = e.req.method;
+  console.log(e);
+  const context = e.context;
+  const { id } = context.params;
+  const findCartById = (cartId) => {
+    let index;
+    const cart = db.cart.find((t, i) => {
+      if (t.id === cartId) {
+        index = i;
+        return true;
+      }
+      return false;
+    });
+    if (!cart) {
+      const noFoundError = createError({
+        statusCode: 404,
+        statusMessage: "cart not found",
+        data: {}
+      });
+      sendError(e, noFoundError);
+    }
+    return { cart, index };
+  };
+  if (method === "PUT") {
+    const { cart, index } = findCartById(id);
+    const updatedCart = {
+      ...cart,
+      completed: !cart.completed
+    };
+    db.cart[index] = updatedCart;
+    console.log(updatedCart);
+    return updatedCart;
+  }
+  if (method === "DELETE") {
+    const { cart, index } = findCartById(id);
+    db.cart.splice(index, 1);
+    return {
+      message: "item deleted"
+    };
+  }
+});
+
+const _id_$1 = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  'default': _id_
 });
 
 function buildAssetsURL(...path) {

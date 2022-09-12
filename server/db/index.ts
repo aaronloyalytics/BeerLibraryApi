@@ -1,3 +1,4 @@
 export const db = {
-    cart: []
-}
+  cart: [],
+  fav: [],
+};

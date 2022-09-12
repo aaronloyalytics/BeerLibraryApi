@@ -5,15 +5,28 @@
     </div>
     <nav class="site-navigation">
       <ul class="nav">
-        <li><a href="/" :style="isDarkMode ? { color: 'white' } : null">
+        <li>
+          <a href="/" :style="isDarkMode ? { color: 'white' } : null">
             Home
-          </a></li>
-        <li><a href="/about" :style="isDarkMode ? { color: 'white' } : null">
+          </a>
+        </li>
+        <li>
+          <a href="/about" :style="isDarkMode ? { color: 'white' } : null">
             About
-          </a></li>
-        <li><a href="/beer" :style="isDarkMode ? { color: 'white', } : null">
-            Beer API
-          </a></li>
+          </a>
+        </li>
+        <li>
+          <p>
+            <a href="/beer" :style="isDarkMode ? { color: 'white', } : null">
+              Beer API
+            </a>
+            <!-- ·
+            <a href="/cart">About</a>
+            ·
+            <a href="/beer">Beer API</a> -->
+
+          </p>
+        </li>
         <li><label class="switch">
             <input type="checkbox" v-model="isDarkMode" @click="toggleDarkMode">
             <span class="slider round"></span>

@@ -58,6 +58,9 @@
       "vue-demi": [
         "node_modules/nuxt/dist/app/compat/vue-demi"
       ],
+      "#color-mode-options": [
+        ".nuxt/color-mode-options"
+      ],
       "#head": [
         "node_modules/nuxt/dist/head/runtime"
       ],
