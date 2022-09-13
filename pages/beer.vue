@@ -6,28 +6,38 @@ const brewedAfter = ref("");
 let pgNo = ref(1);
 
 const url = computed(() => {
-    return `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12&beer_name=${beerName.value}`
+    let str = `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12`
+
+    if (beerName.value) {
+        str += `&beer_name=${beerName.value}`
+    }
+    if (brewedBefore.value) {
+        str += `&brewed_before=${brewedBefore.value}`
+    }
+    if (brewedBefore.value) {
+        str += `&brewed_after=${brewedBefore.value}`
+    }
+
+    return str
 })
 
 const { data: beers, refresh, error } = await useFetch(
-    () => beerName.value == "" ? `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12` : `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12&beer_name=${beerName.value}`
+    () => {
+        let str = `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12`
+
+        if (beerName.value) {
+            str += `&beer_name=${beerName.value}`
+        }
+        if (brewedBefore.value) {
+            str += `&brewed_before=${brewedBefore.value}`
+        }
+        if (brewedAfter.value) {
+            str += `&brewed_after=${brewedAfter.value}`
+        }
+
+        return str
+    }
 );
-
-//  condition1 ? value1
-// : condition2 ? value2
-//         : condition3 ? value3
-//         : value4;
-
-const searchBeer = async () => {
-    const { data: beers, refresh, error } = await useFetch(
-        () => beerName.value == "" ? `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12` : `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12&beer_name=${beerName.value}`
-    );
-
-}
-
-const brewDate = async () => {
-
-}
 
 const { data: cart } = useAsyncData("cart", () => {
     return $fetch("/api/cart")
@@ -43,7 +53,7 @@ const addFav = async (data) => {
     if (!data) return; console.log(data);
     alert("Added to WishList");
     await $fetch("/api/fav", { method: "post", body: { item: beers.value[data] } });
-    refresh()
+    refresh();
 }
 
 const nextPage = () => {
@@ -97,21 +107,22 @@ useHead({
             <input v-model="beerName" type="text" placeholder="Search Beers e.g. Pale Ale" class="searchButton"/>
         </form> -->
         <div id="cover">
-            <form method="get" @submit.prevent="searchBeer" action="">
+            <form method="get" @submit.prevent="" action="">
                 <div class="tb">
                     <div class="td">
                         <input v-model="beerName" type="text" placeholder="Search" required>
                     </div>
                 </div>
+
             </form>
-            <form method="get" action="">
+            <form method="" @submit.prevent="" action="">
                 <div class="tb">
                     <div class="td">
                         <input v-model="brewedBefore" type="text" placeholder="Brewed Before" required>
                     </div>
                 </div>
             </form>
-            <form method="get" action="">
+            <form method="" @submit.prevent="" action="">
                 <div class="tb">
                     <div class="td">
                         <input v-model="brewedAfter" type="text" placeholder="Brewed After" required>

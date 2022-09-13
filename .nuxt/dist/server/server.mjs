@@ -3271,7 +3271,7 @@ __vite_ssr_exports__.default = (sfc, props) => {
 // - vue/server-renderer ($id_UyJffsox60)
 // - /@id/__x00__plugin-vue:export-helper ($id_eFZ80lXORx)
 // --------------------
-const $id_QDcWBEcptH = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+const $id_0Z8O6ilCjK = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
 const __vite_ssr_import_0__ = await __vite_ssr_import__("/composables/useDarkMode.ts");
 
 const __vite_ssr_import_1__ = await __vite_ssr_import__("vue");
@@ -3293,21 +3293,36 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
     const brewedAfter = __vite_ssr_import_1__.ref("");
     let pgNo = __vite_ssr_import_1__.ref(1);
     const url = __vite_ssr_import_1__.computed(() => {
-      return `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12&beer_name=${beerName.value}`;
+      let str = `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12`;
+      if (beerName.value) {
+        str += `&beer_name=${beerName.value}`;
+      }
+      if (brewedBefore.value) {
+        str += `&brewed_before=${brewedBefore.value}`;
+      }
+      if (brewedBefore.value) {
+        str += `&brewed_after=${brewedBefore.value}`;
+      }
+      return str;
     });
     const { data: beers, refresh, error } = ([__temp, __restore] = __vite_ssr_import_4__.withAsyncContext(() => __vite_ssr_import_2__.useFetch(
-      () => beerName.value == "" ? `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12` : `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12&beer_name=${beerName.value}`
+      () => {
+        let str = `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12`;
+        if (beerName.value) {
+          str += `&beer_name=${beerName.value}`;
+        }
+        if (brewedBefore.value) {
+          str += `&brewed_before=${brewedBefore.value}`;
+        }
+        if (brewedAfter.value) {
+          str += `&brewed_after=${brewedAfter.value}`;
+        }
+        return str;
+      }
     , '$Kmn0Mby3sG')), __temp = await __temp, __restore(), __temp);
-    const searchBeer = async () => {
-      const { data: beers2, refresh: refresh2, error: error2 } = await __vite_ssr_import_2__.useFetch(
-        () => beerName.value == "" ? `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12` : `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12&beer_name=${beerName.value}`
-      , '$AErT264Jhr');
-    };
-    const brewDate = async () => {
-    };
     const { data: cart } = __vite_ssr_import_2__.useAsyncData("cart", () => {
       return $fetch("/api/cart");
-    }, '$fkkHJ42v0O');
+    }, '$AErT264Jhr');
     const addCart = async (data) => {
       if (!data)
         return;
@@ -3346,7 +3361,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
         }
       ]
     });
-    const __returned__ = { isDarkMode, toggleDarkMode, beerName, brewedBefore, brewedAfter, pgNo, url, beers, refresh, error, searchBeer, brewDate, cart, addCart, addFav, nextPage, prevPage };
+    const __returned__ = { isDarkMode, toggleDarkMode, beerName, brewedBefore, brewedAfter, pgNo, url, beers, refresh, error, cart, addCart, addFav, nextPage, prevPage };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -3356,7 +3371,7 @@ const __vite_ssr_import_5__ = await __vite_ssr_import__("vue/server-renderer");
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
   _push(`<!--[--><!-- {{beerName}} --><div class="header" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(22, 22, 30)", color: "white" } : null)}"><div class="header__text"><h1 class="header__main">Beer API</h1><h3 class="header__submain">Search for your favourite beer</h3></div><div class="icons"><a href="./fav"><span class="material-symbols-outlined" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { color: "rgb(255,192,203)" } : null)}">favorite</span></a><a href="./cart"><span class="material-symbols-outlined" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { color: "rgb(212,175,55)" } : null)}">shopping_cart</span></a></div></div><div class="pagination"><a href="#" class="previous" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(27, 29, 33)", color: "white" } : null)}">\xAB Previous</a><a href="#" class="next active">Next \xBB</a></div> <br><div class="search"><!-- <form @submit.prevent="searchBeer">
             <input v-model="beerName" type="text" placeholder="Search Beers e.g. Pale Ale" class="searchButton"/>
-        </form> --><div id="cover"><form method="get" action=""><div class="tb"><div class="td"><input${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.beerName)} type="text" placeholder="Search" required></div></div></form><form method="get" action=""><div class="tb"><div class="td"><input${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.brewedBefore)} type="text" placeholder="Brewed Before" required></div></div></form><form method="get" action=""><div class="tb"><div class="td"><input${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.brewedAfter)} type="text" placeholder="Brewed After" required></div></div></form></div></div><div class="container" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(22, 22, 30)" } : null)}"><!--[-->`);
+        </form> --><div id="cover"><form method="get" action=""><div class="tb"><div class="td"><input${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.beerName)} type="text" placeholder="Search" required></div></div></form><form method="" action=""><div class="tb"><div class="td"><input${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.brewedBefore)} type="text" placeholder="Brewed Before" required></div></div></form><form method="" action=""><div class="tb"><div class="td"><input${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.brewedAfter)} type="text" placeholder="Brewed After" required></div></div></form></div></div><div class="container" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(22, 22, 30)" } : null)}"><!--[-->`);
   __vite_ssr_import_5__.ssrRenderList($setup.beers, (beer, index) => {
     _push(`<div class="card" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(15, 15, 19)" } : null)}"><div class="star">\u{1F9E1}</div><div class="card-header"><img${__vite_ssr_import_5__.ssrRenderAttr("src", beer.image_url)} alt="rover"></div><div class="card-body" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(27, 29, 33)", color: "white" } : null)}"><span class="tag tag-teal">Ph: ${__vite_ssr_import_5__.ssrInterpolate(beer.ph)}</span><h4><a${__vite_ssr_import_5__.ssrRenderAttr("href", `/beers/${beer.name}`)} style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(27, 29, 33)", color: "white" } : null)}">${__vite_ssr_import_5__.ssrInterpolate(beer.name)}</a></h4><p>${__vite_ssr_import_5__.ssrInterpolate(beer.description)}</p><p> Tagline: <br> ${__vite_ssr_import_5__.ssrInterpolate(beer.tagline)}</p><div class="beer"><div class="beer-info"><h5>${__vite_ssr_import_5__.ssrInterpolate(beer.first_brewed)}</h5><small>${__vite_ssr_import_5__.ssrInterpolate(beer.tagline)}</small> <br><small><span class="material-symbols-outlined addBeer" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { color: "rgb(255,255,255)" } : null)}"> add_shopping_cart </span></small></div></div></div></div>`);
   });
@@ -3917,7 +3932,7 @@ __vite_ssr_exports__.default = ".gif{\r\n    min-height: 100%;\r\n    min-width:
 // - /pages/beer.vue?vue&type=style&index=0&lang.css ($id_Nz0MWzsC9L)
 // - /@id/__x00__plugin-vue:export-helper ($id_eFZ80lXORx)
 // --------------------
-const $id_8eegZLGHal = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
+const $id_TCP7AsNtZj = async function (global, module, exports, __vite_ssr_exports__, __vite_ssr_import_meta__, __vite_ssr_import__, __vite_ssr_dynamic_import__, __vite_ssr_exportAll__) {
 const __vite_ssr_import_0__ = await __vite_ssr_import__("/composables/useDarkMode.ts");
 
 const __vite_ssr_import_1__ = await __vite_ssr_import__("vue");
@@ -3939,21 +3954,36 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
     const brewedAfter = __vite_ssr_import_1__.ref("");
     let pgNo = __vite_ssr_import_1__.ref(1);
     const url = __vite_ssr_import_1__.computed(() => {
-      return `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12&beer_name=${beerName.value}`;
+      let str = `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12`;
+      if (beerName.value) {
+        str += `&beer_name=${beerName.value}`;
+      }
+      if (brewedBefore.value) {
+        str += `&brewed_before=${brewedBefore.value}`;
+      }
+      if (brewedBefore.value) {
+        str += `&brewed_after=${brewedBefore.value}`;
+      }
+      return str;
     });
     const { data: beers, refresh, error } = ([__temp, __restore] = __vite_ssr_import_4__.withAsyncContext(() => __vite_ssr_import_2__.useFetch(
-      () => beerName.value == "" ? `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12` : `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12&beer_name=${beerName.value}`
+      () => {
+        let str = `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12`;
+        if (beerName.value) {
+          str += `&beer_name=${beerName.value}`;
+        }
+        if (brewedBefore.value) {
+          str += `&brewed_before=${brewedBefore.value}`;
+        }
+        if (brewedAfter.value) {
+          str += `&brewed_after=${brewedAfter.value}`;
+        }
+        return str;
+      }
     , '$lwP790FbCg')), __temp = await __temp, __restore(), __temp);
-    const searchBeer = async () => {
-      const { data: beers2, refresh: refresh2, error: error2 } = await __vite_ssr_import_2__.useFetch(
-        () => beerName.value == "" ? `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12` : `https://api.punkapi.com/v2/beers?page=${pgNo.value}&per_page=12&beer_name=${beerName.value}`
-      , '$O0wml0LTGa');
-    };
-    const brewDate = async () => {
-    };
     const { data: cart } = __vite_ssr_import_2__.useAsyncData("cart", () => {
       return $fetch("/api/cart");
-    }, '$ofoqWbX3ud');
+    }, '$O0wml0LTGa');
     const addCart = async (data) => {
       if (!data)
         return;
@@ -3992,7 +4022,7 @@ const _sfc_main = /* @__PURE__ */ __vite_ssr_import_4__.defineComponent({
         }
       ]
     });
-    const __returned__ = { isDarkMode, toggleDarkMode, beerName, brewedBefore, brewedAfter, pgNo, url, beers, refresh, error, searchBeer, brewDate, cart, addCart, addFav, nextPage, prevPage };
+    const __returned__ = { isDarkMode, toggleDarkMode, beerName, brewedBefore, brewedAfter, pgNo, url, beers, refresh, error, cart, addCart, addFav, nextPage, prevPage };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -4002,7 +4032,7 @@ const __vite_ssr_import_5__ = await __vite_ssr_import__("vue/server-renderer");
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
   _push(`<!--[--><!-- {{beerName}} --><div class="header" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(22, 22, 30)", color: "white" } : null)}"><div class="header__text"><h1 class="header__main">Beer API</h1><h3 class="header__submain">Search for your favourite beer</h3></div><div class="icons"><a href="./fav"><span class="material-symbols-outlined" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { color: "rgb(255,192,203)" } : null)}">favorite</span></a><a href="./cart"><span class="material-symbols-outlined" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { color: "rgb(212,175,55)" } : null)}">shopping_cart</span></a></div></div><div class="pagination"><a href="#" class="previous" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(27, 29, 33)", color: "white" } : null)}">\xAB Previous</a><a href="#" class="next active">Next \xBB</a></div> <br><div class="search"><!-- <form @submit.prevent="searchBeer">
             <input v-model="beerName" type="text" placeholder="Search Beers e.g. Pale Ale" class="searchButton"/>
-        </form> --><div id="cover"><form method="get" action=""><div class="tb"><div class="td"><input${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.beerName)} type="text" placeholder="Search" required></div></div></form><form method="get" action=""><div class="tb"><div class="td"><input${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.brewedBefore)} type="text" placeholder="Brewed Before" required></div></div></form><form method="get" action=""><div class="tb"><div class="td"><input${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.brewedAfter)} type="text" placeholder="Brewed After" required></div></div></form></div></div><div class="container" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(22, 22, 30)" } : null)}"><!--[-->`);
+        </form> --><div id="cover"><form method="get" action=""><div class="tb"><div class="td"><input${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.beerName)} type="text" placeholder="Search" required></div></div></form><form method="" action=""><div class="tb"><div class="td"><input${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.brewedBefore)} type="text" placeholder="Brewed Before" required></div></div></form><form method="" action=""><div class="tb"><div class="td"><input${__vite_ssr_import_5__.ssrRenderAttr("value", $setup.brewedAfter)} type="text" placeholder="Brewed After" required></div></div></form></div></div><div class="container" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(22, 22, 30)" } : null)}"><!--[-->`);
   __vite_ssr_import_5__.ssrRenderList($setup.beers, (beer, index) => {
     _push(`<div class="card" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(15, 15, 19)" } : null)}"><div class="star">\u{1F9E1}</div><div class="card-header"><img${__vite_ssr_import_5__.ssrRenderAttr("src", beer.image_url)} alt="rover"></div><div class="card-body" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(27, 29, 33)", color: "white" } : null)}"><span class="tag tag-teal">Ph: ${__vite_ssr_import_5__.ssrInterpolate(beer.ph)}</span><h4><a${__vite_ssr_import_5__.ssrRenderAttr("href", `/beers/${beer.name}`)} style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { backgroundColor: "rgb(27, 29, 33)", color: "white" } : null)}">${__vite_ssr_import_5__.ssrInterpolate(beer.name)}</a></h4><p>${__vite_ssr_import_5__.ssrInterpolate(beer.description)}</p><p> Tagline: <br> ${__vite_ssr_import_5__.ssrInterpolate(beer.tagline)}</p><div class="beer"><div class="beer-info"><h5>${__vite_ssr_import_5__.ssrInterpolate(beer.first_brewed)}</h5><small>${__vite_ssr_import_5__.ssrInterpolate(beer.tagline)}</small> <br><small><span class="material-symbols-outlined addBeer" style="${__vite_ssr_import_5__.ssrRenderStyle($setup.isDarkMode ? { color: "rgb(255,255,255)" } : null)}"> add_shopping_cart </span></small></div></div></div></div>`);
   });
@@ -5643,7 +5673,7 @@ const __modules__ = {
   "@giphy/js-fetch-api": $id_3GUECxw8vY,
   "vue/server-renderer": $id_aRHphPzMpI,
   "/@id/__x00__plugin-vue:export-helper": $id_mHD6riC5ol,
-  "/pages/beer.vue?macro=true": $id_QDcWBEcptH,
+  "/pages/beer.vue?macro=true": $id_0Z8O6ilCjK,
   "/pages/beers/[name].vue?macro=true": $id_cns8bS54AQ,
   "/pages/cart.vue?macro=true": $id_TUeugovdDZ,
   "/server/db/index.ts": $id_rlSI2A7TiJ,
@@ -5651,7 +5681,7 @@ const __modules__ = {
   "/pages/index.vue?macro=true": $id_i7GBo78qxv,
   "/pages/about.vue": $id_ScA0NSy8hI,
   "/pages/about.vue?vue&type=style&index=0&lang.css": $id_h9jBSPnwwi,
-  "/pages/beer.vue": $id_8eegZLGHal,
+  "/pages/beer.vue": $id_TCP7AsNtZj,
   "/pages/beer.vue?vue&type=style&index=0&lang.css": $id_MFVL8X3Myx,
   "/pages/beers/[name].vue": $id_hdbHAUAxw1,
   "/pages/beers/[name].vue?vue&type=style&index=0&lang.css": $id_OcQRcmFX60,
